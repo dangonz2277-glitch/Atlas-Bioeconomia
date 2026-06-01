@@ -1,0 +1,23 @@
+{
+  "name": "Disuelto",
+  "rules": [
+    {
+      "name": "AMAZONICA",
+      "filter": [
+        "==",
+        "macroregio",
+        "AMAZONICA"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#49985e",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

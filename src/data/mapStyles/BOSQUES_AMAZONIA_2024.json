@@ -1,0 +1,131 @@
+{
+  "name": "BOSQUES_AMAZONIA_2024",
+  "rules": [
+    {
+      "name": "Bosque Amaz�nico H�medo Siempreverde Estacional",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Amaz�nico H�medo Siempreverde Estacional"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1d483e",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Amaz�nico Preandino H�medo Siempreverde",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Amaz�nico Preandino H�medo Siempreverde"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#215c45",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque de Llanuras Inundables",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque de Llanuras Inundables"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#23823f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque H�medo del Escudo Prec�mbrico",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque H�medo del Escudo Prec�mbrico"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#24a91f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Inferior",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Inferior"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#3abc1b",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Medio",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Medio"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#7be30d",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Superior",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Superior"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6f605",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "BioEconomía Bolivia",
+  "description": "Plataforma de gestión territorial y sostenibilidad para la bioeconomía en Bolivia, integrando análisis geoespacial y catálogos de productos sostenibles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

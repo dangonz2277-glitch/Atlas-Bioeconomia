@@ -1,0 +1,77 @@
+{
+  "name": "AP_DEPARTAMENTAL_AMAZONIA_2018",
+  "rules": [
+    {
+      "name": "Bruno Racua",
+      "filter": [
+        "==",
+        "nombre",
+        "Bruno Racua"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#3be96d",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Eva Eva Mosetenes",
+      "filter": [
+        "==",
+        "nombre",
+        "Eva Eva Mosetenes"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#cea81d",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Reserva Silvestre de los Río Tahuamanu y Orthon",
+      "filter": [
+        "==",
+        "nombre",
+        "Reserva Silvestre de los Río Tahuamanu y Orthon"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#e243b2",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Yacuma",
+      "filter": [
+        "==",
+        "nombre",
+        "Yacuma"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#7d91da",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

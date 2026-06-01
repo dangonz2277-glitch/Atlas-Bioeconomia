@@ -1,0 +1,135 @@
+{
+  "name": "Cortado",
+  "rules": [
+    {
+      "name": "0 - 2 ton",
+      "filter": [
+        "&&",
+        [
+          ">=",
+          "PROD_Tn",
+          0
+        ],
+        [
+          "<=",
+          "PROD_Tn",
+          2
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Mark",
+          "wellKnownName": "circle",
+          "color": "#266b73",
+          "radius": 2,
+          "strokeColor": "#ffffff",
+          "strokeWidth": 0.5
+        }
+      ]
+    },
+    {
+      "name": "2 - 4 ton",
+      "filter": [
+        "&&",
+        [
+          ">",
+          "PROD_Tn",
+          2
+        ],
+        [
+          "<=",
+          "PROD_Tn",
+          4
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Mark",
+          "wellKnownName": "circle",
+          "color": "#266b73",
+          "radius": 3.5,
+          "strokeColor": "#ffffff",
+          "strokeWidth": 0.5
+        }
+      ]
+    },
+    {
+      "name": "4 - 8 ton",
+      "filter": [
+        "&&",
+        [
+          ">",
+          "PROD_Tn",
+          4
+        ],
+        [
+          "<=",
+          "PROD_Tn",
+          8
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Mark",
+          "wellKnownName": "circle",
+          "color": "#266b73",
+          "radius": 5.5,
+          "strokeColor": "#ffffff",
+          "strokeWidth": 0.5
+        }
+      ]
+    },
+    {
+      "name": "8 - 16 ton",
+      "filter": [
+        "&&",
+        [
+          ">",
+          "PROD_Tn",
+          8
+        ],
+        [
+          "<=",
+          "PROD_Tn",
+          16
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Mark",
+          "wellKnownName": "circle",
+          "color": "#266b73",
+          "radius": 7,
+          "strokeColor": "#ffffff",
+          "strokeWidth": 0.5
+        }
+      ]
+    },
+    {
+      "name": "16 - 916,254 ton",
+      "filter": [
+        "&&",
+        [
+          ">",
+          "PROD_Tn",
+          16
+        ],
+        [
+          "<=",
+          "PROD_Tn",
+          "916.25406999999995605"
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Mark",
+          "wellKnownName": "circle",
+          "color": "#266b73",
+          "radius": 9,
+          "strokeColor": "#ffffff",
+          "strokeWidth": 0.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "BOSQUES_CHIQUITANIA_PANTANAL_STACRUZ_2025",
+  "rules": [
+    {
+      "name": "Boque Chiquitano",
+      "filter": [
+        "==",
+        "descrip",
+        "Boque Chiquitano"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#3abc1b",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque del Pantanal",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque del Pantanal"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6f605",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque H�medo del Escudo Prec�mbrico",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque H�medo del Escudo Prec�mbrico"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1d483e",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque transici�n Chiquitano Amazonas",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque transici�n Chiquitano Amazonas"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#23823f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

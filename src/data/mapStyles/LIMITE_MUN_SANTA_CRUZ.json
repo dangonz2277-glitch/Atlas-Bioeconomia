@@ -1,0 +1,52 @@
+{
+  "name": "LIM_MUNICIPAL_CHIQUITANIA_PANTANAL_STACRUZ_2025",
+  "rules": [
+    {
+      "name": "Single symbol",
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#e8718d",
+          "fillOpacity": 0,
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineDasharray": [
+            1,
+            2
+          ],
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "scaleDenominator": {
+        "max": 332004
+      },
+      "symbolizers": [
+        {
+          "kind": "Text",
+          "label": {
+            "name": "strToUpperCase",
+            "args": [
+              {
+                "name": "property",
+                "args": [
+                  "mun_tioc"
+                ]
+              }
+            ]
+          },
+          "color": "#323232",
+          "haloWidth": 2,
+          "haloColor": "#fafafa",
+          "placement": "point",
+          "font": [
+            "Segoe UI"
+          ],
+          "size": 13
+        }
+      ]
+    }
+  ]
+}

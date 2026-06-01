@@ -1,0 +1,113 @@
+{
+  "name": "BOSQUES_ALTIPLANO_2024",
+  "rules": [
+    {
+      "name": "Bosque Andino",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Andino"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6f605",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque de Valles Secos Interandinos",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque de Valles Secos Interandinos"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#57cf15",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Inferior",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Inferior"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#24a91f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Medio",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Medio"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#23823f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Semideciduo",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Semideciduo"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#215c45",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Yungue�o Montano Superior",
+      "filter": [
+        "==",
+        "descrip",
+        "Bosque Yungue�o Montano Superior"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1d483e",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

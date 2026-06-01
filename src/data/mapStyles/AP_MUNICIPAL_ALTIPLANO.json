@@ -1,0 +1,815 @@
+{
+  "name": "AP_MUNICIPAL_ALTIPLANO",
+  "rules": [
+    {
+      "name": "Área Natural de Manejo Integrado del Gobierno Autonomo Municipal de Guanay",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Natural de Manejo Integrado del Gobierno Autonomo Municipal de Guanay"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fff2ae",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Arenales Cochiraya",
+      "filter": [
+        "==",
+        "nombre",
+        "Arenales Cochiraya"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#ffff00",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Arenales Sora",
+      "filter": [
+        "==",
+        "nombre",
+        "Arenales Sora"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fdc07a",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Arenales Tagarete",
+      "filter": [
+        "==",
+        "nombre",
+        "Arenales Tagarete"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fdb46c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque de Bolognia",
+      "filter": [
+        "==",
+        "nombre",
+        "Bosque de Bolognia"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fdb46c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosquecillo de Pura Pura",
+      "filter": [
+        "==",
+        "nombre",
+        "Bosquecillo de Pura Pura"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fda75f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosquecillo y Serrania de Auquisamaña",
+      "filter": [
+        "==",
+        "nombre",
+        "Bosquecillo y Serrania de Auquisamaña"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6d84a",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cabeza de la Vibora",
+      "filter": [
+        "==",
+        "nombre",
+        "Cabeza de la Vibora"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6d84a",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Capachos",
+      "filter": [
+        "==",
+        "nombre",
+        "Capachos"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6d84a",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro Aruntaya (23 de marzo)",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro Aruntaya (23 de marzo)"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#8ccd57",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro Cerrato",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro Cerrato"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#8ccd57",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro de Ticani",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro de Ticani"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#8ccd57",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro Llucancari y Taraqui",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro Llucancari y Taraqui"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b3e3ee",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro San Pedro",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro San Pedro"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b3e3ee",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro Viscachani",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro Viscachani"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#80cfd8",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerros de Challaloma",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerros de Challaloma"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#42aed0",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Chusaqueri",
+      "filter": [
+        "==",
+        "nombre",
+        "Chusaqueri"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#42aed0",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cóndores Lakota",
+      "filter": [
+        "==",
+        "nombre",
+        "Cóndores Lakota"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#bd8cc3",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Corazon de Jesus",
+      "filter": [
+        "==",
+        "nombre",
+        "Corazon de Jesus"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#bd8cc3",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cuchilla Chuquiaguillo y Quebradas del Rio Callapa",
+      "filter": [
+        "==",
+        "nombre",
+        "Cuchilla Chuquiaguillo y Quebradas del Rio Callapa"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#bd8cc3",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "El Condor",
+      "filter": [
+        "==",
+        "nombre",
+        "El Condor"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b168b1",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Espacio Natural de Conservacion Hampaturi",
+      "filter": [
+        "==",
+        "nombre",
+        "Espacio Natural de Conservacion Hampaturi"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fba794",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Gran Jardín de la Revolución",
+      "filter": [
+        "==",
+        "nombre",
+        "Gran Jardín de la Revolución"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fb745c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Huayllani",
+      "filter": [
+        "==",
+        "nombre",
+        "Huayllani"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#ef5845",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Jonkhomarca",
+      "filter": [
+        "==",
+        "nombre",
+        "Jonkhomarca"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#ef5845",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Keyllumani",
+      "filter": [
+        "==",
+        "nombre",
+        "Keyllumani"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#99c2b5",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "La Cumbre",
+      "filter": [
+        "==",
+        "nombre",
+        "La Cumbre"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#99c2b5",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "La Vibora",
+      "filter": [
+        "==",
+        "nombre",
+        "La Vibora"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#678f66",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Laguna Cota Cota",
+      "filter": [
+        "==",
+        "nombre",
+        "Laguna Cota Cota"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#678f66",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Muela del Diablo y Cerro Pachajalla",
+      "filter": [
+        "==",
+        "nombre",
+        "Muela del Diablo y Cerro Pachajalla"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#678f66",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Paisaje Turístico Biocultural del Lago Titicaca",
+      "filter": [
+        "==",
+        "nombre",
+        "Paisaje Turístico Biocultural del Lago Titicaca"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f1e19d",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque de Aranjuez",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque de Aranjuez"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f1e19d",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque Municipal Huaripampa",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque Municipal Huaripampa"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f1c868",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque Nacional Mallasa",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque Nacional Mallasa"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f1c868",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque Natural Acuatico",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque Natural Acuatico"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f1c868",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque Urbano Central",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque Urbano Central"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b3e1c2",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Reserva de Agua y Bosques Montañosos Serranias del Mururata",
+      "filter": [
+        "==",
+        "nombre",
+        "Reserva de Agua y Bosques Montañosos Serranias del Mururata"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#99d7b3",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Rumy Campana I",
+      "filter": [
+        "==",
+        "nombre",
+        "Rumy Campana I"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#7fca93",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Rumy Campana II",
+      "filter": [
+        "==",
+        "nombre",
+        "Rumy Campana II"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#4db47e",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Sapo",
+      "filter": [
+        "==",
+        "nombre",
+        "Sapo"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1a9d6f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Serranías de Aruntaya",
+      "filter": [
+        "==",
+        "nombre",
+        "Serranías de Aruntaya"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b3e095",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Serranias de Oruro",
+      "filter": [
+        "==",
+        "nombre",
+        "Serranias de Oruro"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a6cf86",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Siete Lagunas",
+      "filter": [
+        "==",
+        "nombre",
+        "Siete Lagunas"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#99c078",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Valle de la Luna y Cactareo",
+      "filter": [
+        "==",
+        "nombre",
+        "Valle de la Luna y Cactareo"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#8cb06c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Valle de las Animas",
+      "filter": [
+        "==",
+        "nombre",
+        "Valle de las Animas"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#8cb06c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

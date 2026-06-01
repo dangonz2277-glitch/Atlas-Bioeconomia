@@ -1,0 +1,76 @@
+{
+  "name": "AP_MUNICIPAL_SANTA_CRUZ",
+  "rules": [
+    {
+      "name": "Área Natural de Manejo Integrado Laguna Marfil",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Natural de Manejo Integrado Laguna Marfil"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#ffff73",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bajo Paragua de San Ignacio de Velasco",
+      "filter": [
+        "==",
+        "nombre",
+        "Bajo Paragua de San Ignacio de Velasco"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b3de53",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque Municipal del Bajo Paragua",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque Municipal del Bajo Paragua"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#6a72c4",
+          "outlineColor": "#6a72c4",
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Reserva Municipal del Patrimonio Natural y cultural del Copaibo",
+      "filter": [
+        "==",
+        "nombre",
+        "Reserva Municipal del Patrimonio Natural y cultural del Copaibo"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#a4469f",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

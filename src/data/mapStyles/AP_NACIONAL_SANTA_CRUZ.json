@@ -1,0 +1,23 @@
+{
+  "name": "AP_NACIONAL_SANTA_CRUZ_2018",
+  "rules": [
+    {
+      "name": "Noel Kempff Mercado",
+      "filter": [
+        "==",
+        "nombre_ap",
+        "Noel Kempff Mercado"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#e76e50",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

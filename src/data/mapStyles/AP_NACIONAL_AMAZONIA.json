@@ -1,0 +1,95 @@
+{
+  "name": "AP_NACIONAL_AMAZONIA_2018",
+  "rules": [
+    {
+      "name": "Estación Biológica del Beni",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Estación Biológica del Beni"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#81d7d4",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Isiboro Securé",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Isiboro Securé"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#3111d1",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Madidi",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Madidi"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#d959aa",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Manuripi",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Manuripi"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#eea03a",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Pilón Lajas",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Pilón Lajas"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#7fe461",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "AP_NACIONAL_ALTIPLANO_2018",
+  "rules": [
+    {
+      "name": "Cotapata",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Cotapata"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1e63db",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Eduardo Avaroa",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Eduardo Avaroa"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#65dd1b",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Sajama",
+      "filter": [
+        "==",
+        "nombr_ap",
+        "Sajama"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#cf3f76",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "MACROREGION_CHIQUITANIA_PANTANAL_STACRUZ_2025",
+  "rules": [
+    {
+      "name": "CHIQUITANIA-PANTANAL",
+      "filter": [
+        "==",
+        "macroregio",
+        "CHIQUITANIA-PANTANAL"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#d58570",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

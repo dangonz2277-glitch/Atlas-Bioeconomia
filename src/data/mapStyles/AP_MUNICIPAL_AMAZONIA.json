@@ -1,0 +1,239 @@
+{
+  "name": "AP_MUNICIPAL_AMAZONIA",
+  "rules": [
+    {
+      "name": "Área Modelo de Manejo Integral del Bosque de Santa Rosa del Abuná",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Modelo de Manejo Integral del Bosque de Santa Rosa del Abuná"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f0e3a4",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Área Municipal de Conservacion y Manejo del Bajo Madidi",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Municipal de Conservacion y Manejo del Bajo Madidi"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fdb46c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Área Natural de Manejo Integrado del Bosque de Porvenir",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Natural de Manejo Integrado del Bosque de Porvenir"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#afe34d",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Área Protegida Municipal Serranía del Tigre - Alto Madidi",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Protegida Municipal Serranía del Tigre - Alto Madidi"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#8cb957",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Área Protegida Municipal Tequeje - Tudaray",
+      "filter": [
+        "==",
+        "nombre",
+        "Área Protegida Municipal Tequeje - Tudaray"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#42aed0",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Bosque Amazonico de Manejo Integral Puerto Rico",
+      "filter": [
+        "==",
+        "nombre",
+        "Bosque Amazonico de Manejo Integral Puerto Rico"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#bd8cc3",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cabeceras del Maniqui",
+      "filter": [
+        "==",
+        "nombre",
+        "Cabeceras del Maniqui"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#fb745c",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Lago San José",
+      "filter": [
+        "==",
+        "nombre",
+        "Lago San José"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#99c2b5",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Lago Tumichucua",
+      "filter": [
+        "==",
+        "nombre",
+        "Lago Tumichucua"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#ffe1a0",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Pampas del Yacuma",
+      "filter": [
+        "==",
+        "nombre",
+        "Pampas del Yacuma"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f1c868",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Parque Ecologico Urbano de Cobija",
+      "filter": [
+        "==",
+        "nombre",
+        "Parque Ecologico Urbano de Cobija"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#7fca93",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Reseva de Vida Silvestre Estancias Elsner Espiritu",
+      "filter": [
+        "==",
+        "nombre",
+        "Reseva de Vida Silvestre Estancias Elsner Espiritu"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#b3e095",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Rhukanrhuka",
+      "filter": [
+        "==",
+        "nombre",
+        "Rhukanrhuka"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#7a995e",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "RIOS_PRINC_SANTA_CRUZ_2003",
+  "rules": [
+    {
+      "name": "Single symbol",
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#4fabdc",
+          "outlineColor": "#4fabdc",
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "symbolizers": [
+        {
+          "kind": "Text",
+          "label": "{{nombre}}",
+          "color": "#0091ca",
+          "haloWidth": 2,
+          "haloColor": "#ffffff",
+          "placement": "line",
+          "font": [
+            "Cambria"
+          ],
+          "size": 13
+        }
+      ]
+    }
+  ]
+}

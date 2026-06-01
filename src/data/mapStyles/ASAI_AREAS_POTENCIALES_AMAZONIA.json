@@ -1,0 +1,35 @@
+{
+  "name": "descargar_layer_distribucion_geografica_del_asai_rnyny",
+  "rules": [
+    {
+      "name": "Zonass aptas para cultivo",
+      "filter": [
+        "==",
+        "VARIABLE",
+        "Habitat con mayor probabilidad de presencia"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "graphicFill": {
+            "kind": "Mark",
+            "wellKnownName": "circle",
+            "color": "#e41a1c",
+            "radius": 1,
+            "strokeColor": "#e41a1c",
+            "strokeWidth": 1,
+            "strokeOpacity": 0
+          }
+        },
+        {
+          "kind": "Fill",
+          "color": "#e41a1c",
+          "fillOpacity": 0.094,
+          "outlineColor": "#e41a1c",
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

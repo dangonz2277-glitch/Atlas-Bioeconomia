@@ -1,0 +1,167 @@
+{
+  "name": "AP_DEPARTAMENTAL_ALTIPLANO_2018",
+  "rules": [
+    {
+      "name": "Cañon de Chuwaqueri",
+      "filter": [
+        "==",
+        "nombre",
+        "Cañon de Chuwaqueri"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#6b2be1",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Cerro Tapilla",
+      "filter": [
+        "==",
+        "nombre",
+        "Cerro Tapilla"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#6bc843",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Flavio Machicado Viscarra",
+      "filter": [
+        "==",
+        "nombre",
+        "Flavio Machicado Viscarra"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#e36e2b",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Huancaroma",
+      "filter": [
+        "==",
+        "nombre",
+        "Huancaroma"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#6390ef",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Llica",
+      "filter": [
+        "==",
+        "nombre",
+        "Llica"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#c93e6a",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Mirikiri",
+      "filter": [
+        "==",
+        "nombre",
+        "Mirikiri"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#cc3aca",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Poopo",
+      "filter": [
+        "==",
+        "nombre",
+        "Poopo"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#c8cc49",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Tuni Condoriri",
+      "filter": [
+        "==",
+        "nombre",
+        "Tuni Condoriri"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1ee467",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "Yura",
+      "filter": [
+        "==",
+        "nombre",
+        "Yura"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#81d3d6",
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

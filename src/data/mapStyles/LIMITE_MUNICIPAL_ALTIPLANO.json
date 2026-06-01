@@ -1,0 +1,22 @@
+{
+  "name": "LIM_MUNICIPAL_ALTIPLANO_2026",
+  "rules": [
+    {
+      "name": "Single symbol",
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#e8718d",
+          "fillOpacity": 0,
+          "outlineColor": "#232323",
+          "outlineWidth": 0.5,
+          "outlineDasharray": [
+            1,
+            2
+          ],
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

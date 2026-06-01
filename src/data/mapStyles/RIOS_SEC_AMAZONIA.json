@@ -1,0 +1,39 @@
+{
+  "name": "RIOS_SEC_AMAZONIA_2003",
+  "rules": [
+    {
+      "name": "Single symbol",
+      "symbolizers": [
+        {
+          "kind": "Line",
+          "color": "#4fabdc",
+          "width": 1,
+          "join": "bevel",
+          "cap": "square",
+          "dasharray": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "name": "",
+      "scaleDenominator": {
+        "max": 110237
+      },
+      "symbolizers": [
+        {
+          "kind": "Text",
+          "label": "{{nombre}}",
+          "color": "#0091ca",
+          "placement": "line",
+          "font": [
+            "Cambria"
+          ],
+          "size": 13
+        }
+      ]
+    }
+  ]
+}

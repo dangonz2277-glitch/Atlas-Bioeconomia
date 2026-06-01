@@ -1,0 +1,22 @@
+{
+  "name": "Disuelto",
+  "rules": [
+    {
+      "name": "ALTIPLANO",
+      "filter": [
+        "==",
+        "macroregio",
+        "ALTIPLANO"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f4e1cc",
+          "outlineColor": "#664427",
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}
