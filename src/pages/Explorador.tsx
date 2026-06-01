@@ -166,7 +166,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/BOSQUES_AMAZONIA_2024_simplified.geojson",
-        styleUrl: "/src/data/mapstyles/BOSQUES_AMAZONIA_2024.json"
+        styleUrl: "/maps/mapStyles/BOSQUES_AMAZONIA_2024.json"
       },
       {
         id: "amazon-asai",
@@ -194,7 +194,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         ],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/ASAI_AREAS_POTENCIALES_AMAZONIA.geojson",
-        styleUrl: "/src/data/mapstyles/ASAI_AREAS_POTENCIALES_AMAZONIA.json"
+        styleUrl: "/maps/mapStyles/ASAI_AREAS_POTENCIALES_AMAZONIA.json"
       },
       {
         id: "amazon-comunidades",
@@ -233,7 +233,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/RIOS_PRIN_AMAZONIA_2003_simplified.geojson",
-        styleUrl: "/src/data/mapstyles/RIOS_PRIN_AMAZONIA.json"
+        styleUrl: "/maps/mapStyles/RIOS_PRIN_AMAZONIA.json"
       }
     ]
   },
@@ -257,7 +257,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/BOSQUES_SANTA_CRUZ_2024_simplified.geojson",
-        styleUrl: "/src/data/mapstyles/BOSQUES_SANTA_CRUZ_2024.json"
+        styleUrl: "/maps/mapStyles/BOSQUES_SANTA_CRUZ_2024.json"
       },
       {
         id: "sc-asai",
@@ -271,10 +271,14 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
           social: "Integración de comunidades chiquitanas a cadenas de valor sostenibles.",
           challenges: ["Estrés hídrico", "Infraestructura de acopio"]
         },
-        gallery: [],
+        gallery: [
+          { url: "/images/azai/asai1.jpg", description: "Recolección tradicional de frutos en el dosel amazónico." },
+          { url: "/images/azai/asai2.jpg", description: "Centros de acopio locales gestionados por comunidades." },
+          { url: "/images/azai/asai3.jpg", description: "Procesamiento artesanal del Asaí con alta participación." }
+        ],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/ASAI_AREAS_POTENCIALES_SANTA_CRUZ.geojson",
-        styleUrl: "/src/data/mapstyles/ASAI_AREAS_POTENCIALES_SANTA_CRUZ.json"
+        styleUrl: "/maps/mapStyles/ASAI_AREAS_POTENCIALES_SANTA_CRUZ.json"
       },
       {
         id: "sc-comunidades",
@@ -307,7 +311,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/RIOS_PRIN_SANTA_CRUZ_2003.geojson",
-        styleUrl: "/src/data/mapstyles/RIOS_PRIN_SANTA_CRUZ.json"
+        styleUrl: "/maps/mapStyles/RIOS_PRIN_SANTA_CRUZ.json"
       }
     ]
   },
@@ -331,7 +335,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/BOSQUES_ALTIPLANO_2024_simplified.geojson",
-        styleUrl: "/src/data/mapstyles/BOSQUES_ALTIPLANO_2024.json"
+        styleUrl: "/maps/mapStyles/BOSQUES_ALTIPLANO_2024.json"
       },
       {
         id: "altiplano-quinua",
@@ -357,7 +361,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         ],
         geometryType: 'points',
         geojsonUrl: "/maps/geojson/PRODUCCION_QUINOA_ALTIPLANO_2024.geojson",
-        styleUrl: "/src/data/mapstyles/QUINOA_MACROREGION_ALTIPLANO.json"
+        styleUrl: "/maps/mapStyles/QUINOA_MACROREGION_ALTIPLANO.json"
       },
       {
         id: "altiplano-comunidades",
@@ -390,7 +394,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/RIOS_PRIN_ALTIPLANO_2003_simplified.geojson",
-        styleUrl: "/src/data/mapstyles/RIOS_PRIN_ALTIPLANO.json"
+        styleUrl: "/maps/mapStyles/RIOS_PRIN_ALTIPLANO.json"
       }
     ]
   }
@@ -492,7 +496,7 @@ export default function Explorador() {
   // Lazy Fetching Effect
   useEffect(() => {
     let isMounted = true;
-    
+
     const fetchMapData = async () => {
       setIsLoadingMap(true);
       setGeoJsonData(null);
@@ -508,7 +512,7 @@ export default function Explorador() {
         }
 
         const results = await Promise.all(promises);
-        
+
         if (isMounted) {
           setGeoJsonData(results[0]);
           if (activeLayer.styleUrl && results[1]) {
@@ -569,7 +573,7 @@ export default function Explorador() {
 
           {/* Render Active Layer Geometry */}
           {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && (
-            <GeoJSON 
+            <GeoJSON
               key={`${activeLayer.id}-poly`}
               data={geoJsonData}
               style={(feature) => getLeafletStyle(feature, styleData)}
@@ -597,7 +601,7 @@ export default function Explorador() {
 
           {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'points' && (
             <MarkerClusterGroup chunkedLoading maxClusterRadius={50}>
-              <GeoJSON 
+              <GeoJSON
                 key={`${activeLayer.id}-points`}
                 data={geoJsonData}
                 pointToLayer={(feature, latlng) => {
@@ -679,10 +683,10 @@ export default function Explorador() {
                     key={layer.id}
                     onClick={() => setActiveLayerId(layer.id)}
                     className={cn(
-                      "px-4 py-1.5 rounded-full text-xs font-bold transition-all border shadow-sm",
-                      activeLayerId === layer.id 
-                        ? "bg-[#B0946D] text-white border-[#B0946D]" 
-                        : "bg-white text-[#4D4D4D] border-outline-variant/30 hover:bg-[#B0946D]/10 hover:border-[#B0946D]/30"
+                      "px-4 py-1.5 rounded-full text-xs transition-all border shadow-sm",
+                      activeLayerId === layer.id
+                        ? "bg-[#B0946D] text-white border-[#B0946D] font-black border-2 scale-105"
+                        : "bg-white text-[#4D4D4D] border-outline-variant/30 font-bold hover:bg-[#B0946D]/10 hover:border-[#B0946D]/30"
                     )}
                   >
                     {layer.name}
@@ -709,15 +713,20 @@ export default function Explorador() {
 
                     {bioeconomyData[activeBioKey].metricas.length > 0 && (
                       <div className="grid grid-cols-2 gap-4 mb-8">
-                        {bioeconomyData[activeBioKey].metricas.map((stat, i) => (
-                          <div
-                            key={i}
-                            className="p-5 rounded-3xl border border-outline-variant/10 bg-[#EBEBEB] shadow-sm hover:shadow-md transition-shadow group"
-                          >
-                            <div className="text-2xl font-black text-[#654D81] leading-none mb-2 group-hover:scale-105 transition-transform origin-left">{stat.valor}</div>
-                            <div className="text-[10px] font-bold text-[#4D4D4D] uppercase tracking-wide opacity-80 leading-tight">{stat.etiqueta}</div>
-                          </div>
-                        ))}
+                        <AnimatePresence mode="popLayout">
+                          {bioeconomyData[activeBioKey].metricas.map((stat, i) => (
+                            <motion.div
+                              key={`${activeBioKey}-stat-${i}`}
+                              initial={{ opacity: 0, y: 15 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
+                              className="p-5 rounded-3xl border border-outline-variant/10 bg-[#EBEBEB] shadow-sm hover:shadow-md transition-shadow group"
+                            >
+                              <div className="text-2xl font-black text-[#654D81] leading-none mb-2 group-hover:scale-105 transition-transform origin-left">{stat.valor}</div>
+                              <div className="text-[10px] font-bold text-[#4D4D4D] uppercase tracking-wide opacity-80 leading-tight">{stat.etiqueta}</div>
+                            </motion.div>
+                          ))}
+                        </AnimatePresence>
                       </div>
                     )}
 
@@ -807,9 +816,9 @@ export default function Explorador() {
         )}
       </AnimatePresence>
 
-      {/* FLYING RIGHT PANEL (GALLERY) */}
+      {/* FLYING RIGHT PANEL (GALLERY OR INSIGHT CARD) */}
       <AnimatePresence>
-        {isGalleryOpen && activeLayer.gallery.length > 0 && (
+        {isGalleryOpen && (activeLayer.gallery.length > 0 || activeBioKey?.includes("rios")) && (
           <motion.aside
             initial={{ x: 450, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -820,94 +829,141 @@ export default function Explorador() {
             <div className="p-6 border-b border-outline-variant/10 flex items-center justify-between bg-[#654D81]/5">
               <div className="flex items-center gap-2">
                 <Maximize2 className="w-4 h-4 text-[#654D81]" />
-                <span className="text-xs font-black text-[#654D81] uppercase tracking-[0.2em]">Evidencia Territorial</span>
+                <span className="text-xs font-black text-[#654D81] uppercase tracking-[0.2em]">
+                  {activeBioKey?.includes("rios") ? "Insight Hidrológico" : "Evidencia Territorial"}
+                </span>
               </div>
               <button
                 onClick={() => setIsGalleryOpen(false)}
                 className="p-2 hover:bg-[#654D81]/10 rounded-full text-[#4D4D4D] transition-colors"
-                title="Cerrar Galería"
+                title="Cerrar Panel"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="flex-grow flex flex-col p-6">
-              {/* Image Carousel */}
-              <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-black/5 mb-6 group shadow-lg">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeLayer.gallery[currentImageIndex]?.url}
-                    src={activeLayer.gallery[currentImageIndex]?.url}
-                    alt="Gallery item"
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full h-full object-cover"
-                  />
-                </AnimatePresence>
-
-                {/* Carousel Overlays / Nav */}
-                <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
-                  <button
-                    onClick={prevImage}
-                    className="w-12 h-12 rounded-full bg-[#EFEAE2]/80 backdrop-blur-md shadow-lg flex items-center justify-center text-[#654D81] pointer-events-auto hover:bg-[#EFEAE2] active:scale-90 transition-all opacity-0 group-hover:opacity-100"
+              {activeBioKey?.includes("rios") ? (
+                /* INSIGHT CARD FOR RIVERS */
+                <div className="h-full flex flex-col items-center justify-center text-center bg-[#654D81]/5 rounded-[2rem] border border-[#654D81]/15 p-8 relative overflow-hidden shadow-inner">
+                  <div className="absolute top-0 inset-x-0 h-[60%] bg-gradient-to-b from-[#654D81]/10 to-transparent pointer-events-none" />
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", bounce: 0.5 }}
+                    className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center mb-6 z-10 border border-outline-variant/20"
                   >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="w-12 h-12 rounded-full bg-[#EFEAE2]/80 backdrop-blur-md shadow-lg flex items-center justify-center text-[#654D81] pointer-events-auto hover:bg-[#EFEAE2] active:scale-90 transition-all opacity-0 group-hover:opacity-100"
+                    <Navigation className="w-10 h-10 text-[#1E90FF]" />
+                  </motion.div>
+                  <motion.h4
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-sm font-black text-[#654D81] uppercase tracking-[0.2em] mb-4 z-10"
                   >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
+                    ¿Sabías qué?
+                  </motion.h4>
+                  <motion.p
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-base text-[#4D4D4D] leading-relaxed font-medium z-10"
+                  >
+                    Estas redes hídricas son las arterias principales para la logística comunitaria y la regulación climática de la bioeconomía. Garantizan el transporte, el sustento y la biodiversidad en toda la región.
+                  </motion.p>
                 </div>
+              ) : (
+                <>
+                  {/* Image Carousel */}
+                  <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-black/5 mb-6 group shadow-lg">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={activeLayer.gallery[currentImageIndex]?.url}
+                        src={activeLayer.gallery[currentImageIndex]?.url}
+                        alt="Gallery item"
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                      />
+                    </AnimatePresence>
 
-                {/* Description Overlay - High Contrast */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-12">
-                  <p className="text-white text-xl font-bold leading-tight drop-shadow-md">
-                    {activeLayer.gallery[currentImageIndex]?.description}
-                  </p>
-                </div>
+                    {/* Dark gradient overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-90 pointer-events-none" />
 
-                {/* Indicadores de posición */}
-                <div className="absolute top-4 right-6 flex gap-1.5">
-                  {activeLayer.gallery.map((_, i) => (
-                    <div
-                      key={i}
-                      className={cn(
-                        "w-2 h-2 rounded-full transition-all border border-white/50",
-                        currentImageIndex === i ? "bg-white w-6" : "bg-white/30"
-                      )}
-                    />
-                  ))}
-                </div>
-              </div>
+                    {/* Carousel Overlays / Nav */}
+                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none z-10">
+                      <button
+                        onClick={prevImage}
+                        className="w-12 h-12 rounded-full bg-[#EFEAE2]/80 backdrop-blur-md shadow-lg flex items-center justify-center text-[#654D81] pointer-events-auto hover:bg-[#EFEAE2] active:scale-90 transition-all opacity-0 group-hover:opacity-100"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="w-12 h-12 rounded-full bg-[#EFEAE2]/80 backdrop-blur-md shadow-lg flex items-center justify-center text-[#654D81] pointer-events-auto hover:bg-[#EFEAE2] active:scale-90 transition-all opacity-0 group-hover:opacity-100"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
+                    </div>
 
-              {/* Info Adicional / Thumbnails */}
-              <div className="flex-grow overflow-y-auto custom-scrollbar">
-                <div className="grid grid-cols-3 gap-2">
-                  {activeLayer.gallery.map((img, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentImageIndex(i)}
-                      className={cn(
-                        "aspect-square rounded-2xl overflow-hidden border-2 transition-all",
-                        currentImageIndex === i ? "border-[#B0946D] scale-95 shadow-inner" : "border-transparent opacity-60 hover:opacity-100"
-                      )}
-                    >
-                      <img src={img.url} className="w-full h-full object-cover" alt="" />
-                    </button>
-                  ))}
-                </div>
+                    {/* Description Overlay - High Contrast */}
+                    <div className="absolute inset-x-0 bottom-0 p-8 pt-12 z-10">
+                      <AnimatePresence mode="wait">
+                        <motion.p
+                          key={activeLayer.gallery[currentImageIndex]?.description}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.5 }}
+                          className="text-white text-lg font-medium leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                        >
+                          {activeLayer.gallery[currentImageIndex]?.description}
+                        </motion.p>
+                      </AnimatePresence>
+                    </div>
 
-                <div className="mt-8 p-6 bg-[#654D81]/5 rounded-[2rem] border border-[#654D81]/15">
-                  <h4 className="text-[10px] font-black text-[#654D81] uppercase tracking-[0.2em] mb-3">Contexto Visual</h4>
-                  <p className="text-xs text-[#4D4D4D] leading-relaxed">
-                    Esta galería muestra evidencias recolectadas en campo sobre {activeLayer.name} permitiendo una comprensión visual del impacto bioeconómico.
-                  </p>
-                </div>
-              </div>
+                    {/* Indicadores de posición */}
+                    <div className="absolute top-4 right-6 flex gap-1.5 z-10">
+                      {activeLayer.gallery.map((_, i) => (
+                        <div
+                          key={i}
+                          className={cn(
+                            "w-2 h-2 rounded-full transition-all border border-white/50",
+                            currentImageIndex === i ? "bg-white w-6" : "bg-white/30"
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Info Adicional / Thumbnails */}
+                  <div className="flex-grow overflow-y-auto custom-scrollbar">
+                    <div className="grid grid-cols-3 gap-2">
+                      {activeLayer.gallery.map((img, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentImageIndex(i)}
+                          className={cn(
+                            "aspect-square rounded-2xl overflow-hidden border-2 transition-all",
+                            currentImageIndex === i ? "border-[#B0946D] scale-95 shadow-inner" : "border-transparent opacity-60 hover:opacity-100"
+                          )}
+                        >
+                          <img src={img.url} className="w-full h-full object-cover" alt="" />
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 p-6 bg-[#654D81]/5 rounded-[2rem] border border-[#654D81]/15">
+                      <h4 className="text-[10px] font-black text-[#654D81] uppercase tracking-[0.2em] mb-3">Contexto Visual</h4>
+                      <p className="text-xs text-[#4D4D4D] leading-relaxed">
+                        Esta galería muestra evidencias recolectadas en campo sobre {activeLayer.name} permitiendo una comprensión visual del impacto bioeconómico.
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="h-6 bg-[#EFEAE2]/95" />
@@ -919,7 +975,7 @@ export default function Explorador() {
       <div
         className={cn(
           "fixed top-24 z-[1000] flex flex-col gap-3 transition-all duration-500",
-          isGalleryOpen && activeLayer.gallery.length > 0 ? "right-[430px]" : "right-10"
+          isGalleryOpen && (activeLayer.gallery.length > 0 || activeBioKey?.includes("rios")) ? "right-[430px]" : "right-10"
         )}
       >
         <button
