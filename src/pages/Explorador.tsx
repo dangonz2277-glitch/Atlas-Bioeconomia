@@ -503,8 +503,23 @@ export default function Explorador() {
       setStyleData(null);
 
       try {
+        const fetchGeoJson = async () => {
+          const response = await fetch(activeLayer.geojsonUrl);
+          let textData = await response.text(); // Leer como texto crudo
+
+          // Sanitización de palabras corruptas conocidas originadas en el SIG
+          textData = textData
+            .replace(/Amaznico/g, 'Amazónico')
+            .replace(/Amaznico/g, 'Amazónico')
+            .replace(/Hmedo/g, 'Húmedo')
+            .replace(/Hmedo/g, 'Húmedo')
+            .replace(/Preandino/g, 'Preandino'); // Agrega aquí cualquier otra si es necesario
+
+          return JSON.parse(textData);
+        };
+
         const promises: Promise<any>[] = [
-          fetch(activeLayer.geojsonUrl).then(res => res.json())
+          fetchGeoJson()
         ];
 
         if (activeLayer.styleUrl) {
@@ -579,20 +594,35 @@ export default function Explorador() {
               style={(feature) => getLeafletStyle(feature, styleData)}
               pointToLayer={(feature, latlng) => {
                 return L.circleMarker(latlng, {
-                  radius: 5,
+                  radius: 9, // Aumentado de 5 a 9 para mejor visibilidad táctil
                   fillColor: "#B0946D",
                   color: "#FFFFFF",
-                  weight: 1,
+                  weight: 2, // Borde más grueso para resaltar sobre el fondo
                   opacity: 1,
-                  fillOpacity: 0.8
+                  fillOpacity: 0.9
                 });
               }}
               onEachFeature={(feature, layer) => {
                 const name = feature.properties?.name || feature.properties?.NOMBRE || activeLayer.name;
+                
+                const ignoreKeys = ['OBJECTID', 'Shape_Length', 'Shape_Area', 'ID', 'FID'];
+                const props = Object.entries(feature.properties || {})
+                  .filter(([key, value]) => !ignoreKeys.includes(key) && value !== null && value !== '');
+                
+                const propsHtml = props.map(([key, value]) => `
+                  <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
+                    <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">${key.replace(/_/g, ' ')}:</span>
+                    <span class="text-xs text-gray-800 text-right break-words">${value}</span>
+                  </li>
+                `).join('');
+
                 layer.bindPopup(`
-                  <div style="padding: 4px; min-width: 150px;">
-                    <h4 style="margin: 0 0 6px 0; font-weight: bold; color: #654D81; font-family: sans-serif;">${name}</h4>
-                    <p style="margin: 0; font-size: 11px; color: #666;">Capa: ${activeLayer.name}</p>
+                  <div class="p-2 min-w-[220px] max-w-[300px] bg-white rounded-lg">
+                    <h4 class="m-0 mb-2 font-bold text-[#654D81] font-sans text-sm border-b pb-1">${name}</h4>
+                    <p class="m-0 mb-3 text-[11px] text-gray-500">Capa: ${activeLayer.name}</p>
+                    <ul class="m-0 p-0 list-none max-h-[200px] overflow-y-auto pr-1">
+                      ${propsHtml}
+                    </ul>
                   </div>
                 `);
               }}
@@ -606,20 +636,35 @@ export default function Explorador() {
                 data={geoJsonData}
                 pointToLayer={(feature, latlng) => {
                   return L.circleMarker(latlng, {
-                    radius: 5,
+                    radius: 9, // Aumentado de 5 a 9 para mejor visibilidad táctil
                     fillColor: "#B0946D",
                     color: "#FFFFFF",
-                    weight: 1,
+                    weight: 2, // Borde más grueso para resaltar sobre el fondo
                     opacity: 1,
-                    fillOpacity: 0.8
+                    fillOpacity: 0.9
                   });
                 }}
                 onEachFeature={(feature, layer) => {
                   const name = feature.properties?.name || feature.properties?.NOMBRE || feature.properties?.Comunidad || 'Punto de interés';
+                  
+                  const ignoreKeys = ['OBJECTID', 'Shape_Length', 'Shape_Area', 'ID', 'FID'];
+                  const props = Object.entries(feature.properties || {})
+                    .filter(([key, value]) => !ignoreKeys.includes(key) && value !== null && value !== '');
+                  
+                  const propsHtml = props.map(([key, value]) => `
+                    <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
+                      <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">${key.replace(/_/g, ' ')}:</span>
+                      <span class="text-xs text-gray-800 text-right break-words">${value}</span>
+                    </li>
+                  `).join('');
+
                   layer.bindPopup(`
-                    <div style="padding: 4px; min-width: 150px;">
-                      <h4 style="margin: 0 0 6px 0; font-weight: bold; color: #654D81; font-family: sans-serif;">${name}</h4>
-                      <p style="margin: 0; font-size: 11px; color: #666;">Capa: ${activeLayer.productName}</p>
+                    <div class="p-2 min-w-[220px] max-w-[300px] bg-white rounded-lg">
+                      <h4 class="m-0 mb-2 font-bold text-[#654D81] font-sans text-sm border-b pb-1">${name}</h4>
+                      <p class="m-0 mb-3 text-[11px] text-gray-500">Capa: ${activeLayer.productName}</p>
+                      <ul class="m-0 p-0 list-none max-h-[200px] overflow-y-auto pr-1">
+                        ${propsHtml}
+                      </ul>
                     </div>
                   `);
                 }}
