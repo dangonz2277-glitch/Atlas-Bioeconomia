@@ -424,6 +424,90 @@ const customMarkerIcon = (color: string) => L.divIcon({
   iconAnchor: [7, 7]
 });
 
+const LAYER_STATS: Record<string, {
+  titulo: string;
+  estadisticas: { icono: string; label: string; valor: string }[];
+  graficos: { label: string; porcentaje: number; color: string }[];
+  cadenaValor?: { fase: string; descripcion: string }[];
+}> = {
+  rios: {
+    titulo: "Resumen Hidrológico",
+    estadisticas: [
+      { icono: "📍", label: "Ríos principales", valor: "12" },
+      { icono: "👥", label: "Comunidades conectadas", valor: "87" },
+      { icono: "🌴", label: "Áreas potenciales de asaí cercanas", valor: "34" }
+    ],
+    graficos: [
+      { label: "Vías de acceso fluvial (Alta conectividad)", porcentaje: 85, color: "bg-blue-500" }
+    ]
+  },
+  bosques: {
+    titulo: "Resumen de Bosques",
+    estadisticas: [
+      { icono: "🌳", label: "Tipos de bosque", valor: "7" },
+      { icono: "🌴", label: "Especies dominantes", valor: "Múltiples" },
+      { icono: "📍", label: "Áreas de aprovechamiento", valor: "Activas" },
+      { icono: "🛡️", label: "Áreas Nacionales", valor: "5" }
+    ],
+    graficos: []
+  },
+  comunidades: {
+    titulo: "Datos Demográficos",
+    estadisticas: [
+      { icono: "🏘️", label: "Comunidades Totales", valor: "XXX" },
+      { icono: "👥", label: "Municipios Vinculados", valor: "98" },
+      { icono: "🏡", label: "Áreas Municipales", valor: "46" },
+      { icono: "🗺️", label: "Áreas Departamentales", valor: "9" }
+    ],
+    graficos: []
+  },
+  areas_potenciales: {
+    titulo: "Zonas Potenciales Asaí",
+    estadisticas: [
+      { icono: "📈", label: "Rendimiento", valor: "Alto" }
+    ],
+    graficos: [
+      { label: "Viabilidad", porcentaje: 85, color: "bg-[#654D81]" }
+    ],
+    cadenaValor: [
+      {
+        fase: "1. Recolección y Acopio",
+        descripcion: "Unidades familiares, indígenas y zafreros recolectan la fruta fresca, la cual pasa por intermediarios para llegar a procesadoras."
+      },
+      {
+        fase: "2. Transformación Industrial",
+        descripcion: "El despulpado y congelamiento se centraliza en Cobija y Riberalta, mientras que la liofilización se lleva a cabo en Santa Cruz."
+      },
+      {
+        fase: "3. Certificación y Mercado",
+        descripcion: "Certificación de calidad por entes internacionales y comercialización de pulpa y liofilizado en supermercados."
+      },
+      {
+        fase: "4. Ecosistema Institucional",
+        descripcion: "Apoyo en investigación y desarrollo por la Universidad Amazónica de Pando, CIAT, entidades gubernamentales y ONGs."
+      }
+    ]
+  },
+  produccion_quinua: {
+    titulo: "Rendimiento Agrícola",
+    estadisticas: [
+      { icono: "🌾", label: "Producción", valor: "Premium" }
+    ],
+    graficos: [
+      { label: "Calidad", porcentaje: 95, color: "bg-[#B0946D]" }
+    ]
+  }
+};
+
+const getStatsKey = (layerId: string) => {
+  if (layerId.includes('rios')) return 'rios';
+  if (layerId.includes('bosques')) return 'bosques';
+  if (layerId.includes('comunidades')) return 'comunidades';
+  if (layerId.includes('asai')) return 'areas_potenciales';
+  if (layerId.includes('quinua')) return 'produccion_quinua';
+  return 'bosques';
+};
+
 // --- COMPONENTS ---
 
 function MapController({ center, zoom }: { center: [number, number], zoom: number }) {
@@ -653,14 +737,14 @@ export default function Explorador() {
               key={`${activeLayer.id}-poly`}
               data={geoJsonData}
               style={(feature) => {
+                const baseStyle = getLeafletStyle(feature, styleData);
                 if (activeLayer.id.toLowerCase().includes('rios')) {
                   return {
-                    color: '#1E3A8A',
-                    weight: 3.5,
-                    opacity: 0.85
+                    ...baseStyle,
+                    weight: 4
                   };
                 }
-                return getLeafletStyle(feature, styleData);
+                return baseStyle;
               }}
               pointToLayer={(feature, latlng) => {
                 return L.circleMarker(latlng, {
@@ -835,22 +919,39 @@ export default function Explorador() {
                       )}
                     </div>
 
-                    {bioeconomyData[activeBioKey].metricas.length > 0 && (
-                      <div className="grid grid-cols-2 gap-4 mb-8">
+                    {LAYER_STATS[getStatsKey(activeLayer.id)] && (
+                      <div className="grid grid-cols-2 gap-4 my-6">
                         <AnimatePresence mode="popLayout">
-                          {bioeconomyData[activeBioKey].metricas.map((stat, i) => (
+                          {LAYER_STATS[getStatsKey(activeLayer.id)].estadisticas.map((stat, i) => (
                             <motion.div
-                              key={`${activeBioKey}-stat-${i}`}
+                              key={`${activeLayer.id}-stat-${i}`}
                               initial={{ opacity: 0, y: 15 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
-                              className="p-5 rounded-3xl border border-outline-variant/10 bg-[#EBEBEB] shadow-sm hover:shadow-md transition-shadow group"
+                              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col items-start group"
                             >
-                              <div className="text-2xl font-black text-[#654D81] leading-none mb-2 group-hover:scale-105 transition-transform origin-left">{stat.valor}</div>
-                              <div className="text-[10px] font-bold text-[#4D4D4D] uppercase tracking-wide opacity-80 leading-tight">{stat.etiqueta}</div>
+                              <div className="text-2xl mb-2 group-hover:scale-105 transition-transform origin-left">{stat.icono}</div>
+                              <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wide leading-tight mb-1">{stat.label}</div>
+                              <div className="text-xl font-black text-[#654D81] leading-none">{stat.valor}</div>
                             </motion.div>
                           ))}
                         </AnimatePresence>
+                      </div>
+                    )}
+
+                    {LAYER_STATS[getStatsKey(activeLayer.id)]?.graficos?.length > 0 && (
+                      <div className="space-y-4 mb-8">
+                        {LAYER_STATS[getStatsKey(activeLayer.id)].graficos.map((graf, idx) => (
+                          <div key={idx} className="space-y-1">
+                            <div className="flex justify-between text-[10px] font-bold text-[#654D81] uppercase tracking-wide">
+                              <span>{graf.label}</span>
+                              <span>{graf.porcentaje}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                              <div className={`h-full ${graf.color} rounded-full transition-all duration-1000`} style={{ width: `${graf.porcentaje}%` }} />
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     )}
 
@@ -865,6 +966,18 @@ export default function Explorador() {
                             className="text-sm text-[#4D4D4D] leading-relaxed p-1"
                           >
                             <p className="mb-4">{bioeconomyData[activeBioKey].descripcion}</p>
+                            
+                            {LAYER_STATS[getStatsKey(activeLayer.id)]?.cadenaValor && (
+                              <div className="border-l-2 border-gray-200 ml-3 mt-8">
+                                {LAYER_STATS[getStatsKey(activeLayer.id)].cadenaValor!.map((item, idx) => (
+                                  <div key={idx} className="relative mb-8 ml-6">
+                                    <span className="absolute -left-[33px] top-1 flex h-4 w-4 rounded-full bg-[#654D81] ring-4 ring-white" />
+                                    <h4 className="text-sm font-bold text-gray-800">{item.fase}</h4>
+                                    <p className="text-xs text-gray-600 mt-1">{item.descripcion}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </motion.div>
                         </AnimatePresence>
                       </div>
@@ -942,7 +1055,7 @@ export default function Explorador() {
 
       {/* FLYING RIGHT PANEL (GALLERY OR INSIGHT CARD) */}
       <AnimatePresence>
-        {isGalleryOpen && (activeLayer.gallery.length > 0 || activeBioKey?.includes("rios")) && (
+        {isGalleryOpen && activeLayer.gallery.length > 0 && (
           <motion.aside
             initial={{ x: 450, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -954,7 +1067,7 @@ export default function Explorador() {
               <div className="flex items-center gap-2">
                 <Maximize2 className="w-4 h-4 text-[#654D81]" />
                 <span className="text-xs font-black text-[#654D81] uppercase tracking-[0.2em]">
-                  {activeBioKey?.includes("rios") ? "Insight Hidrológico" : "Evidencia Territorial"}
+                  Estadísticas y Evidencia
                 </span>
               </div>
               <button
@@ -966,37 +1079,8 @@ export default function Explorador() {
               </button>
             </div>
 
-            <div className="flex-grow flex flex-col p-6">
-              {activeBioKey?.includes("rios") ? (
-                /* INSIGHT CARD FOR RIVERS */
-                <div className="h-full flex flex-col items-center justify-center text-center bg-[#654D81]/5 rounded-[2rem] border border-[#654D81]/15 p-8 relative overflow-hidden shadow-inner">
-                  <div className="absolute top-0 inset-x-0 h-[60%] bg-gradient-to-b from-[#654D81]/10 to-transparent pointer-events-none" />
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", bounce: 0.5 }}
-                    className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center mb-6 z-10 border border-outline-variant/20"
-                  >
-                    <Navigation className="w-10 h-10 text-[#1E90FF]" />
-                  </motion.div>
-                  <motion.h4
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="text-sm font-black text-[#654D81] uppercase tracking-[0.2em] mb-4 z-10"
-                  >
-                    ¿Sabías qué?
-                  </motion.h4>
-                  <motion.p
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-base text-[#4D4D4D] leading-relaxed font-medium z-10"
-                  >
-                    Estas redes hídricas son las arterias principales para la logística comunitaria y la regulación climática de la bioeconomía. Garantizan el transporte, el sustento y la biodiversidad en toda la región.
-                  </motion.p>
-                </div>
-              ) : (
+            <div className="flex-grow flex flex-col p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+              {activeLayer.gallery.length > 0 && (
                 <>
                   {/* Image Carousel */}
                   <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-black/5 mb-6 group shadow-lg">
@@ -1088,6 +1172,8 @@ export default function Explorador() {
                   </div>
                 </>
               )}
+
+
             </div>
 
             <div className="h-6 bg-[#EFEAE2]/95" />
@@ -1099,7 +1185,7 @@ export default function Explorador() {
       <div
         className={cn(
           "fixed top-24 z-[1000] flex flex-col gap-3 transition-all duration-500",
-          isGalleryOpen && (activeLayer.gallery.length > 0 || activeBioKey?.includes("rios")) ? "right-[430px]" : "right-10"
+          isGalleryOpen && activeLayer.gallery.length > 0 ? "right-[430px]" : "right-10"
         )}
       >
         <button
