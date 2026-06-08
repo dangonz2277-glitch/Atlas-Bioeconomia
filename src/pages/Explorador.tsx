@@ -428,7 +428,6 @@ const LAYER_STATS: Record<string, {
   titulo: string;
   estadisticas: { icono: string; label: string; valor: string }[];
   graficos: { label: string; porcentaje: number; color: string }[];
-  cadenaValor?: { fase: string; descripcion: string }[];
 }> = {
   rios: {
     titulo: "Resumen Hidrológico",
@@ -459,33 +458,17 @@ const LAYER_STATS: Record<string, {
       { icono: "🏡", label: "Áreas Municipales", valor: "46" },
       { icono: "🗺️", label: "Áreas Departamentales", valor: "9" }
     ],
-    graficos: []
+    graficos: [
+      { label: "Participación Comunitaria", porcentaje: 75, color: "bg-[#B0946D]" }
+    ]
   },
   areas_potenciales: {
-    titulo: "Zonas Potenciales Asaí",
+    titulo: "Potencial Productivo",
     estadisticas: [
       { icono: "📈", label: "Rendimiento", valor: "Alto" }
     ],
     graficos: [
       { label: "Viabilidad", porcentaje: 85, color: "bg-[#654D81]" }
-    ],
-    cadenaValor: [
-      {
-        fase: "1. Recolección y Acopio",
-        descripcion: "Unidades familiares, indígenas y zafreros recolectan la fruta fresca, la cual pasa por intermediarios para llegar a procesadoras."
-      },
-      {
-        fase: "2. Transformación Industrial",
-        descripcion: "El despulpado y congelamiento se centraliza en Cobija y Riberalta, mientras que la liofilización se lleva a cabo en Santa Cruz."
-      },
-      {
-        fase: "3. Certificación y Mercado",
-        descripcion: "Certificación de calidad por entes internacionales y comercialización de pulpa y liofilizado en supermercados."
-      },
-      {
-        fase: "4. Ecosistema Institucional",
-        descripcion: "Apoyo en investigación y desarrollo por la Universidad Amazónica de Pando, CIAT, entidades gubernamentales y ONGs."
-      }
     ]
   },
   produccion_quinua: {
@@ -919,7 +902,7 @@ export default function Explorador() {
                       )}
                     </div>
 
-                    {LAYER_STATS[getStatsKey(activeLayer.id)] && (
+                    {LAYER_STATS[getStatsKey(activeLayer.id)]?.estadisticas.length > 0 && (
                       <div className="grid grid-cols-2 gap-4 my-6">
                         <AnimatePresence mode="popLayout">
                           {LAYER_STATS[getStatsKey(activeLayer.id)].estadisticas.map((stat, i) => (
@@ -928,26 +911,26 @@ export default function Explorador() {
                               initial={{ opacity: 0, y: 15 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
-                              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col items-start group"
+                              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col items-start group hover:shadow-md transition-shadow"
                             >
-                              <div className="text-2xl mb-2 group-hover:scale-105 transition-transform origin-left">{stat.icono}</div>
-                              <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wide leading-tight mb-1">{stat.label}</div>
-                              <div className="text-xl font-black text-[#654D81] leading-none">{stat.valor}</div>
+                              <div className="text-2xl mb-2 group-hover:scale-110 transition-transform origin-left">{stat.icono}</div>
+                              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wide leading-tight mb-1">{stat.label}</div>
+                              <div className="text-xl font-black text-[#654D81]">{stat.valor}</div>
                             </motion.div>
                           ))}
                         </AnimatePresence>
                       </div>
                     )}
-
-                    {LAYER_STATS[getStatsKey(activeLayer.id)]?.graficos?.length > 0 && (
+                    
+                    {LAYER_STATS[getStatsKey(activeLayer.id)]?.graficos.length > 0 && (
                       <div className="space-y-4 mb-8">
                         {LAYER_STATS[getStatsKey(activeLayer.id)].graficos.map((graf, idx) => (
-                          <div key={idx} className="space-y-1">
+                          <div key={idx} className="space-y-2">
                             <div className="flex justify-between text-[10px] font-bold text-[#654D81] uppercase tracking-wide">
                               <span>{graf.label}</span>
                               <span>{graf.porcentaje}%</span>
                             </div>
-                            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div className="w-full h-2.5 bg-[#EBEBEB] rounded-full overflow-hidden border border-outline-variant/10">
                               <div className={`h-full ${graf.color} rounded-full transition-all duration-1000`} style={{ width: `${graf.porcentaje}%` }} />
                             </div>
                           </div>
@@ -966,18 +949,6 @@ export default function Explorador() {
                             className="text-sm text-[#4D4D4D] leading-relaxed p-1"
                           >
                             <p className="mb-4">{bioeconomyData[activeBioKey].descripcion}</p>
-                            
-                            {LAYER_STATS[getStatsKey(activeLayer.id)]?.cadenaValor && (
-                              <div className="border-l-2 border-gray-200 ml-3 mt-8">
-                                {LAYER_STATS[getStatsKey(activeLayer.id)].cadenaValor!.map((item, idx) => (
-                                  <div key={idx} className="relative mb-8 ml-6">
-                                    <span className="absolute -left-[33px] top-1 flex h-4 w-4 rounded-full bg-[#654D81] ring-4 ring-white" />
-                                    <h4 className="text-sm font-bold text-gray-800">{item.fase}</h4>
-                                    <p className="text-xs text-gray-600 mt-1">{item.descripcion}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
                           </motion.div>
                         </AnimatePresence>
                       </div>
@@ -1173,7 +1144,7 @@ export default function Explorador() {
                 </>
               )}
 
-
+              {/* STATS MOVED TO LEFT PANEL */}
             </div>
 
             <div className="h-6 bg-[#EFEAE2]/95" />
