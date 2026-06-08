@@ -434,6 +434,23 @@ function MapController({ center, zoom }: { center: [number, number], zoom: numbe
   return null;
 }
 
+function ZoomController({ activeLayer }: { activeLayer: MapLayer }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (activeLayer.id.includes("bosques")) {
+      map.setMaxZoom(12);
+      if (map.getZoom() > 12) {
+        map.setZoom(12);
+      }
+    } else {
+      map.setMaxZoom(18);
+    }
+  }, [activeLayer, map]);
+
+  return null;
+}
+
 export default function Explorador() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -471,6 +488,34 @@ export default function Explorador() {
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
   const [styleData, setStyleData] = useState<any>(null);
   const [isLoadingMap, setIsLoadingMap] = useState<boolean>(false);
+  const [limiteGeoJson, setLimiteGeoJson] = useState<any>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLimite = async () => {
+      setLimiteGeoJson(null);
+      let filename = "";
+      if (activeRegionKey === "Amazonía") filename = "LIMITE_MACROREGION_AMAZONIA.geojson";
+      else if (activeRegionKey === "Altiplano") filename = "LIMITE_MACROREGION_ALTIPLANO.geojson";
+      else if (activeRegionKey === "Santa Cruz") filename = "LIMITE_MACROREGION_SANTA_CRUZ.geojson";
+
+      if (filename) {
+        try {
+          const response = await fetch(`/maps/geojson/${filename}`);
+          const data = await response.json();
+          if (isMounted) {
+            setLimiteGeoJson(data);
+          }
+        } catch (error) {
+          console.error("Error cargando el límite de la macroregión:", error);
+        }
+      }
+    };
+    fetchLimite();
+    return () => {
+      isMounted = false;
+    };
+  }, [activeRegionKey]);
 
   useEffect(() => {
     const regionParam = searchParams.get("region") as RegionKey;
@@ -576,6 +621,7 @@ export default function Explorador() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MapController center={activeRegion.center} zoom={activeRegion.zoom} />
+          <ZoomController activeLayer={activeLayer} />
           <ScaleControl position="bottomright" />
 
           {/* Loader */}
@@ -586,12 +632,36 @@ export default function Explorador() {
             </div>
           )}
 
+          {/* Límite de la Macroregión */}
+          {limiteGeoJson && (
+            <GeoJSON
+              key={`limite-${activeRegionKey}`}
+              data={limiteGeoJson}
+              interactive={false}
+              style={{
+                fillOpacity: 0,
+                color: '#4A4A4A',
+                weight: 3,
+                dashArray: '5, 10'
+              }}
+            />
+          )}
+
           {/* Render Active Layer Geometry */}
           {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && (
             <GeoJSON
               key={`${activeLayer.id}-poly`}
               data={geoJsonData}
-              style={(feature) => getLeafletStyle(feature, styleData)}
+              style={(feature) => {
+                if (activeLayer.id.toLowerCase().includes('rios')) {
+                  return {
+                    color: '#1E3A8A',
+                    weight: 3.5,
+                    opacity: 0.85
+                  };
+                }
+                return getLeafletStyle(feature, styleData);
+              }}
               pointToLayer={(feature, latlng) => {
                 return L.circleMarker(latlng, {
                   radius: 9, // Aumentado de 5 a 9 para mejor visibilidad táctil
@@ -605,6 +675,15 @@ export default function Explorador() {
               onEachFeature={(feature, layer) => {
                 const name = feature.properties?.name || feature.properties?.NOMBRE || activeLayer.name;
                 
+                if (activeLayer.id.toLowerCase().includes('rios')) {
+                  const nombreRio = feature.properties?.NOMBRE || feature.properties?.NOM_RIO || feature.properties?.NOM_CURSO || "Río Principal";
+                  layer.bindTooltip(nombreRio, {
+                    sticky: true,
+                    direction: 'auto',
+                    className: 'custom-river-tooltip'
+                  });
+                }
+
                 const ignoreKeys = ['OBJECTID', 'Shape_Length', 'Shape_Area', 'ID', 'FID'];
                 const props = Object.entries(feature.properties || {})
                   .filter(([key, value]) => !ignoreKeys.includes(key) && value !== null && value !== '');
@@ -1045,14 +1124,7 @@ export default function Explorador() {
           <Maximize2 className={cn("w-5 h-5 transition-transform", isGalleryOpen && "scale-110")} />
         </button>
 
-        <div className="glass-panel p-2 rounded-[1.5rem] flex flex-col gap-2 border border-outline-variant/20 shadow-xl bg-[#EFEAE2]/90 backdrop-blur-md">
-          <button className="p-3 hover:bg-[#654D81]/10 rounded-xl text-[#654D81] transition-colors" title="Navegación">
-            <Navigation className="w-5 h-5" />
-          </button>
-          <button className="p-3 hover:bg-[#654D81]/10 rounded-xl text-[#654D81] transition-colors" title="Capas">
-            <Layers className="w-5 h-5" />
-          </button>
-        </div>
+
       </div>
     </div>
   );
