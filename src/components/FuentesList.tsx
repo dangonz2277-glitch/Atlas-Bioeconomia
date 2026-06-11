@@ -94,12 +94,12 @@ export default function FuentesList() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: (index % 10) * 0.05, duration: 0.4 }}
-              className="bg-white p-6 md:p-8 rounded-[2rem] border border-outline-variant/10 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex flex-col h-full group"
+              className="bg-white p-6 md:p-8 rounded-[2rem] border border-outline-variant/10 shadow-md hover:shadow-xl hover:border-b-4 hover:border-[#356854] transition-all duration-300 flex flex-col h-full group"
             >
-              <div className="inline-block px-3 py-1 bg-[#664e82]/10 text-[#664e82] text-[10px] font-black uppercase tracking-widest rounded-md w-fit mb-4">
+              <div className="inline-block px-3 py-1 bg-[#397c85]/10 text-[#397c85] text-[10px] font-black uppercase tracking-widest rounded-md w-fit mb-4">
                 {fuente.geometria}
               </div>
-              <h3 className="text-xl font-bold text-[#664e82] mb-3 leading-tight group-hover:text-[#B0946D] transition-colors">
+              <h3 className="text-xl font-bold text-[#654d81] mb-3 leading-tight transition-colors">
                 {fuente.nombre}
               </h3>
               <p className="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
