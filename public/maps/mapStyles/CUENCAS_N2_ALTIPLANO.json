@@ -1,0 +1,80 @@
+{
+  "name": "CUENCAS_N2_2014_ALTIPLANO",
+  "rules": [
+    {
+      "name": "01",
+      "filter": ["==", "NIVEL_2", "01"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#45cc60",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "02",
+      "filter": ["==", "NIVEL_2", "02"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#4b25d5",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "03",
+      "filter": ["==", "NIVEL_2", "03"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#cd57b3",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "46",
+      "filter": ["==", "NIVEL_2", "46"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#bbcf6d",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "86",
+      "filter": ["==", "NIVEL_2", "86"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#73bfd2",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

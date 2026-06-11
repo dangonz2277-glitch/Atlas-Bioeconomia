@@ -9,6 +9,7 @@ import {
   Leaf,
   AlertCircle
 } from "lucide-react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { cn } from "../lib/utils";
 
@@ -146,6 +147,12 @@ export default function Catalogo() {
   const navigate = useNavigate();
   const selectedProductId = searchParams.get("product");
   const selectedProduct = products.find(p => p.id === selectedProductId);
+  const [filtroActivo, setFiltroActivo] = useState('Todos');
+
+  const filteredProducts = products.filter(product => {
+    if (filtroActivo === 'Todos') return true;
+    return product.macroRegion === filtroActivo;
+  });
 
   const handleOpenExplorer = (params: { region: string; layer: string }) => {
     navigate(`/explorador?region=${params.region}&layer=${params.layer}`);
@@ -349,14 +356,38 @@ export default function Catalogo() {
             <p className="text-2xl text-[#4D4D4D] font-medium opacity-80">Repositorio técnico-científico de recursos estratégicos.</p>
           </div>
           <div className="flex gap-2 bg-[#EFEAE2] p-2 rounded-2xl shadow-sm border border-outline-variant/10">
-            <div className="font-display px-6 py-3 bg-[#B0946D] text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-[#B0946D]/20">Todos</div>
-            <div className="font-display px-6 py-3 hover:bg-[#B0946D]/10 rounded-xl text-xs font-black uppercase tracking-widest transition-colors cursor-pointer text-[#4D4D4D]">Amazonía</div>
-            <div className="font-display px-6 py-3 hover:bg-[#B0946D]/10 rounded-xl text-xs font-black uppercase tracking-widest transition-colors cursor-pointer text-[#4D4D4D]">Altiplano</div>
+            <button
+              onClick={() => setFiltroActivo('Todos')}
+              className={cn(
+                "font-display px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-colors cursor-pointer",
+                filtroActivo === 'Todos' ? "bg-[#B0946D] text-white shadow-lg shadow-[#B0946D]/20" : "hover:bg-[#B0946D]/10 text-[#4D4D4D]"
+              )}
+            >
+              Todos
+            </button>
+            <button
+              onClick={() => setFiltroActivo('Amazonía')}
+              className={cn(
+                "font-display px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-colors cursor-pointer",
+                filtroActivo === 'Amazonía' ? "bg-[#B0946D] text-white shadow-lg shadow-[#B0946D]/20" : "hover:bg-[#B0946D]/10 text-[#4D4D4D]"
+              )}
+            >
+              Amazonía
+            </button>
+            <button
+              onClick={() => setFiltroActivo('Altiplano')}
+              className={cn(
+                "font-display px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-colors cursor-pointer",
+                filtroActivo === 'Altiplano' ? "bg-[#B0946D] text-white shadow-lg shadow-[#B0946D]/20" : "hover:bg-[#B0946D]/10 text-[#4D4D4D]"
+              )}
+            >
+              Altiplano
+            </button>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div
               key={product.id}
               className="group bg-[#EFEAE2] rounded-[4rem] overflow-hidden shadow-xl border border-outline-variant/10 flex flex-col sm:flex-row h-full hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"

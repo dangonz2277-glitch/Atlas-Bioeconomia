@@ -120,6 +120,7 @@ const bioeconomyData: Record<string, { titulo: string; metricas: { valor: string
 
 interface MapLayer {
   id: string;
+  category: string;
   catalogProductId?: string;
   name: string;
   productName: string;
@@ -136,6 +137,13 @@ interface MapLayer {
   geometryType: 'polygon' | 'points';
   geojsonUrl: string;
   styleUrl?: string;
+  defaultStyle?: {
+    fillColor?: string;
+    color?: string;
+    weight?: number;
+    fillOpacity?: number;
+    dashArray?: string;
+  };
 }
 
 interface MacroRegion {
@@ -153,6 +161,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
     layers: [
       {
         id: "amazon-bosques",
+        category: "Conservación y Cobertura",
         name: "Bosques",
         productName: "Bosques Amazonía",
         badge: "Conservación",
@@ -170,6 +179,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
       },
       {
         id: "amazon-asai",
+        category: "Sistemas Productivos",
         catalogProductId: "asai",
         name: "Áreas Potenciales Asaí",
         productName: "Asaí",
@@ -198,6 +208,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
       },
       {
         id: "amazon-comunidades",
+        category: "Sistemas Productivos",
         name: "Comunidades",
         productName: "Gobernanza Indígena",
         badge: "Custodios del Bosque",
@@ -219,7 +230,8 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geojsonUrl: "/maps/geojson/COMUNIDADES_AMAZONIA_2024.geojson"
       },
       {
-        id: "amazon-rios",
+        id: "amazon-rios_principales",
+        category: "Recursos Hídricos",
         name: "Ríos Principales",
         productName: "Ríos Principales",
         badge: "Hidrología",
@@ -236,23 +248,80 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         styleUrl: "/maps/mapStyles/RIOS_PRIN_AMAZONIA.json"
       },
       {
-        id: "amazon-areas_protegidas",
-        name: "Áreas Protegidas",
-        productName: "Áreas Protegidas",
+        id: "amazon-rios_secundarios",
+        category: "Recursos Hídricos",
+        name: "Ríos Secundarios",
+        productName: "Ríos Secundarios",
+        badge: "Hidrología",
+        color: "#1E90FF",
+        stats: [],
+        technicalInfo: {
+          context: "Red de drenaje complementaria que tributa a los cauces principales amazónicos.",
+          social: "Conectividad fluvial para comunidades locales.",
+          challenges: ["Contaminación", "Alteración del ciclo hidrológico"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/RIOS_SEC_AMAZONIA_2003_simplified.geojson",
+        styleUrl: "/maps/mapStyles/RIOS_PRIN_AMAZONIA.json"
+      },
+      {
+        id: "amazon-ap_nacional",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Nacionales",
+        productName: "AP Nacional",
         badge: "Conservación",
         color: "#1B5E20",
         stats: [],
         technicalInfo: {
-          context: "Áreas protegidas nacionales, departamentales y municipales de la Amazonía.",
+          context: "Áreas protegidas nacionales de la Amazonía.",
           social: "Conservación de biodiversidad y territorios.",
           challenges: ["Deforestación", "Asentamientos irregulares"]
         },
         gallery: [],
         geometryType: 'polygon',
-        geojsonUrl: ""
+        geojsonUrl: "/maps/geojson/AP_NACIONAL_AMAZONIA.geojson",
+        defaultStyle: { fillColor: '#1B5E20', color: '#004D40', weight: 2, fillOpacity: 0.6 }
+      },
+      {
+        id: "amazon-ap_departamental",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Departamentales",
+        productName: "AP Departamental",
+        badge: "Conservación",
+        color: "#2E8B57",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas departamentales de la Amazonía.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Deforestación", "Asentamientos irregulares"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/AP_DEPARTAMENTAL_AMAZONIA.geojson",
+        defaultStyle: { fillColor: '#2E8B57', color: '#1B5E20', weight: 2, fillOpacity: 0.6 }
+      },
+      {
+        id: "amazon-ap_municipal",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Municipales",
+        productName: "AP Municipal",
+        badge: "Conservación",
+        color: "#90EE90",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas municipales de la Amazonía.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Deforestación", "Asentamientos irregulares"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/AP_MUNICIPAL_AMAZONIA.geojson",
+        defaultStyle: { fillColor: '#90EE90', color: '#2E8B57', weight: 2, fillOpacity: 0.5, dashArray: '4, 4' }
       },
       {
         id: "amazon-sitios_ramsar",
+        category: "Recursos Hídricos",
         name: "Sitios Ramsar",
         productName: "Sitios Ramsar",
         badge: "Humedales",
@@ -267,6 +336,24 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/SITIOS_RAMSAR_2018_AMAZONIA.geojson",
         styleUrl: "/maps/mapStyles/SITIOS_RAMSAR_AMAZONIA.json"
+      },
+      {
+        id: "amazon-cuencas",
+        category: "Recursos Hídricos",
+        name: "Cuencas Hidrográficas",
+        productName: "Cuencas Hidrográficas",
+        badge: "Hidrología",
+        color: "#1f78b4",
+        stats: [],
+        technicalInfo: {
+          context: "Cuencas Hidrográficas de Nivel 2.",
+          social: "N/A",
+          challenges: []
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/CUENCAS_N2_2014_AMAZONIA.geojson",
+        styleUrl: "/maps/mapStyles/CUENCAS_N2_AMAZONIA.json"
       }
     ]
   },
@@ -277,6 +364,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
     layers: [
       {
         id: "sc-bosques",
+        category: "Conservación y Cobertura",
         name: "Bosques",
         productName: "Bosques Santa Cruz",
         badge: "Conservación",
@@ -294,6 +382,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
       },
       {
         id: "sc-asai",
+        category: "Sistemas Productivos",
         name: "Áreas Potenciales Asaí",
         productName: "Asaí (Chiquitano)",
         badge: "Aprovechamiento",
@@ -315,6 +404,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
       },
       {
         id: "sc-comunidades",
+        category: "Sistemas Productivos",
         name: "Comunidades",
         productName: "Comunidades Locales",
         badge: "Gobernanza",
@@ -330,7 +420,8 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geojsonUrl: "/maps/geojson/COMUNIDADES_SANTA_CRUZ_2024.geojson"
       },
       {
-        id: "sc-rios",
+        id: "sc-rios_principales",
+        category: "Recursos Hídricos",
         name: "Ríos Principales",
         productName: "Ríos Principales",
         badge: "Hidrología",
@@ -343,27 +434,66 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         },
         gallery: [],
         geometryType: 'polygon',
-        geojsonUrl: "/maps/geojson/RIOS_PRIN_SANTA_CRUZ_2003.geojson",
+        geojsonUrl: "/maps/geojson/RIOS_PRIN_SANTA_CRUZ_2003_simplified.geojson",
         styleUrl: "/maps/mapStyles/RIOS_PRIN_SANTA_CRUZ.json"
       },
       {
-        id: "sc-areas_protegidas",
-        name: "Áreas Protegidas",
-        productName: "Áreas Protegidas",
+        id: "sc-rios_secundarios",
+        category: "Recursos Hídricos",
+        name: "Ríos Secundarios",
+        productName: "Ríos Secundarios",
+        badge: "Hidrología",
+        color: "#1E90FF",
+        stats: [],
+        technicalInfo: {
+          context: "Cursos de agua secundarios que alimentan el sistema hídrico departamental.",
+          social: "Conectividad fluvial para comunidades locales.",
+          challenges: ["Contaminación", "Alteración del ciclo hidrológico"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/RIOS_SEC_SANTA_CRUZ_2003_simplified.geojson",
+        styleUrl: "/maps/mapStyles/RIOS_PRIN_SANTA_CRUZ.json"
+      },
+      {
+        id: "sc-ap_nacional",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Nacionales",
+        productName: "AP Nacional",
         badge: "Conservación",
         color: "#1B5E20",
         stats: [],
         technicalInfo: {
-          context: "Áreas protegidas nacionales y municipales de Santa Cruz.",
+          context: "Áreas protegidas nacionales de Santa Cruz.",
           social: "Conservación de biodiversidad y territorios.",
           challenges: ["Incendios", "Expansión agrícola"]
         },
         gallery: [],
         geometryType: 'polygon',
-        geojsonUrl: ""
+        geojsonUrl: "/maps/geojson/AP_NACIONAL_SANTA_CRUZ.geojson",
+        defaultStyle: { fillColor: '#1B5E20', color: '#004D40', weight: 2, fillOpacity: 0.6 }
+      },
+      {
+        id: "sc-ap_municipal",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Municipales",
+        productName: "AP Municipal",
+        badge: "Conservación",
+        color: "#90EE90",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas municipales de Santa Cruz.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Incendios", "Expansión agrícola"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/AP_MUNICIPAL_SANTA_CRUZ.geojson",
+        defaultStyle: { fillColor: '#90EE90', color: '#2E8B57', weight: 2, fillOpacity: 0.5, dashArray: '4, 4' }
       },
       {
         id: "sc-sitios_ramsar",
+        category: "Recursos Hídricos",
         name: "Sitios Ramsar",
         productName: "Sitios Ramsar",
         badge: "Humedales",
@@ -377,6 +507,24 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         gallery: [],
         geometryType: 'polygon',
         geojsonUrl: ""
+      },
+      {
+        id: "sc-cuencas",
+        category: "Recursos Hídricos",
+        name: "Cuencas Hidrográficas",
+        productName: "Cuencas Hidrográficas",
+        badge: "Hidrología",
+        color: "#1f78b4",
+        stats: [],
+        technicalInfo: {
+          context: "Cuencas Hidrográficas de Nivel 2.",
+          social: "N/A",
+          challenges: []
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/CUENCAS_N2_2014_SANTACRUZ.geojson",
+        styleUrl: "/maps/mapStyles/CUENCAS_N2_SANTACRUZ.json"
       }
     ]
   },
@@ -387,6 +535,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
     layers: [
       {
         id: "altiplano-bosques",
+        category: "Conservación y Cobertura",
         name: "Bosques",
         productName: "Bosques y Queñuales",
         badge: "Cobertura Altoandina",
@@ -404,6 +553,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
       },
       {
         id: "altiplano-quinua",
+        category: "Sistemas Productivos",
         catalogProductId: "quinua",
         name: "Producción Quinua",
         productName: "Quinua Real",
@@ -430,6 +580,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
       },
       {
         id: "altiplano-comunidades",
+        category: "Sistemas Productivos",
         name: "Comunidades",
         productName: "Comunidades Andinas",
         badge: "Ayllus",
@@ -445,7 +596,8 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geojsonUrl: "/maps/geojson/COMUNIDADES_ALTIPLANO_2024.geojson"
       },
       {
-        id: "altiplano-rios",
+        id: "alt-rios_principales",
+        category: "Recursos Hídricos",
         name: "Ríos Principales",
         productName: "Ríos Principales",
         badge: "Hidrología",
@@ -462,23 +614,80 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         styleUrl: "/maps/mapStyles/RIOS_PRIN_ALTIPLANO.json"
       },
       {
-        id: "altiplano-areas_protegidas",
-        name: "Áreas Protegidas",
-        productName: "Áreas Protegidas",
+        id: "alt-rios_secundarios",
+        category: "Recursos Hídricos",
+        name: "Ríos Secundarios",
+        productName: "Ríos Secundarios",
+        badge: "Hidrología",
+        color: "#1E90FF",
+        stats: [],
+        technicalInfo: {
+          context: "Arroyos y afluentes menores del ecosistema endorreico altiplánico.",
+          social: "Sistemas de vida y riego agrícola de altura.",
+          challenges: ["Escasez de agua", "Contaminación minera"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/RIOS_SEC_ALTIPLANO_2003_simplified.geojson",
+        styleUrl: "/maps/mapStyles/RIOS_PRIN_ALTIPLANO.json"
+      },
+      {
+        id: "altiplano-ap_nacional",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Nacionales",
+        productName: "AP Nacional",
         badge: "Conservación",
         color: "#1B5E20",
         stats: [],
         technicalInfo: {
-          context: "Áreas protegidas nacionales, departamentales y municipales del Altiplano.",
+          context: "Áreas protegidas nacionales del Altiplano.",
           social: "Conservación de biodiversidad y territorios.",
           challenges: ["Cambio climático"]
         },
         gallery: [],
         geometryType: 'polygon',
-        geojsonUrl: ""
+        geojsonUrl: "/maps/geojson/AP_NACIONAL_ALTIPLANO.geojson",
+        defaultStyle: { fillColor: '#1B5E20', color: '#004D40', weight: 2, fillOpacity: 0.6 }
+      },
+      {
+        id: "altiplano-ap_departamental",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Departamentales",
+        productName: "AP Departamental",
+        badge: "Conservación",
+        color: "#2E8B57",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas departamentales del Altiplano.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Cambio climático"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/AP_DEPARTAMENTAL_ALTIPLANO.geojson",
+        defaultStyle: { fillColor: '#2E8B57', color: '#1B5E20', weight: 2, fillOpacity: 0.6 }
+      },
+      {
+        id: "altiplano-ap_municipal",
+        category: "Conservación y Cobertura",
+        name: "Áreas Protegidas Municipales",
+        productName: "AP Municipal",
+        badge: "Conservación",
+        color: "#90EE90",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas municipales del Altiplano.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Cambio climático"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/AP_MUNICIPAL_ALTIPLANO.geojson",
+        defaultStyle: { fillColor: '#90EE90', color: '#2E8B57', weight: 2, fillOpacity: 0.5, dashArray: '4, 4' }
       },
       {
         id: "altiplano-sitios_ramsar",
+        category: "Recursos Hídricos",
         name: "Sitios Ramsar",
         productName: "Sitios Ramsar",
         badge: "Humedales",
@@ -493,15 +702,33 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/SITIOS_RAMSAR_2018_ALTIPLANO.geojson",
         styleUrl: "/maps/mapStyles/SITIOS_RAMSAR_ALTIPLANO.json"
+      },
+      {
+        id: "altiplano-cuencas",
+        category: "Recursos Hídricos",
+        name: "Cuencas Hidrográficas",
+        productName: "Cuencas Hidrográficas",
+        badge: "Hidrología",
+        color: "#1f78b4",
+        stats: [],
+        technicalInfo: {
+          context: "Cuencas Hidrográficas de Nivel 2.",
+          social: "N/A",
+          challenges: []
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/CUENCAS_N2_2014_ALTIPLANO.geojson",
+        styleUrl: "/maps/mapStyles/CUENCAS_N2_ALTIPLANO.json"
       }
     ]
   }
 };
 
-const getLeafletStyle = (feature: any, styleJson: any) => {
+const getLeafletStyle = (feature: any, styleJson: any, defaultStyle?: any) => {
   try {
     if (!styleJson || !styleJson.rules || !styleJson.rules[0] || !styleJson.rules[0].symbolizers || !styleJson.rules[0].symbolizers[0]) {
-      return { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
+      return defaultStyle || { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
     }
     const symbolizer = styleJson.rules[0].symbolizers[0];
     return {
@@ -511,7 +738,7 @@ const getLeafletStyle = (feature: any, styleJson: any) => {
       fillOpacity: symbolizer.opacity !== undefined ? symbolizer.opacity : (symbolizer.fillOpacity !== undefined ? symbolizer.fillOpacity : 0.6)
     };
   } catch (e) {
-    return { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
+    return defaultStyle || { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
   }
 };
 
@@ -694,7 +921,7 @@ const getStatsKey = (layerId: string) => {
   if (layerId.includes('comunidades')) return 'comunidades';
   if (layerId.includes('asai')) return 'areas_potenciales';
   if (layerId.includes('quinua')) return 'produccion_quinua';
-  if (layerId.includes('areas_protegidas')) return 'areas_protegidas';
+  if (layerId.includes('ap_nacional') || layerId.includes('ap_departamental') || layerId.includes('ap_municipal') || layerId.includes('areas_protegidas')) return 'areas_protegidas';
   if (layerId.includes('sitios_ramsar')) return 'sitios_ramsar';
   return 'bosques';
 };
@@ -776,6 +1003,7 @@ export default function Explorador() {
 
   const [activeRegionKey, setActiveRegionKey] = useState<RegionKey>(initialRegion);
   const [activeLayerId, setActiveLayerId] = useState<string>(initialLayer);
+  const [categoriaAbierta, setCategoriaAbierta] = useState<string | null>('Conservación y Cobertura');
 
   const [activeBioKey, setActiveBioKey] = useState<string | null>(null);
 
@@ -796,7 +1024,6 @@ export default function Explorador() {
 
   // Map Data State
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
-  const [apData, setApData] = useState<{nacional: any, departamental: any, municipal: any} | null>(null);
   const [styleData, setStyleData] = useState<any>(null);
   const [isLoadingMap, setIsLoadingMap] = useState<boolean>(false);
   const [limiteGeoJson, setLimiteGeoJson] = useState<any>(null);
@@ -854,41 +1081,20 @@ export default function Explorador() {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchMapData = async () => {
+      const fetchMapData = async () => {
       setIsLoadingMap(true);
       setGeoJsonData(null);
       setStyleData(null);
-      setApData(null);
 
       try {
-        if (activeLayer.id.includes('areas_protegidas')) {
-          const region = activeRegionKey === "Amazonía" ? "AMAZONIA" : activeRegionKey === "Altiplano" ? "ALTIPLANO" : "SANTA_CRUZ";
-          
-          const resNac = await fetch(`/maps/geojson/AP_NACIONAL_${region}.geojson`);
-          const nac = resNac.ok ? await resNac.json() : null;
-          
-          let dep = null;
-          if (region !== "SANTA_CRUZ") {
-            const resDep = await fetch(`/maps/geojson/AP_DEPARTAMENTAL_${region}.geojson`);
-            dep = resDep.ok ? await resDep.json() : null;
-          }
-          
-          const resMun = await fetch(`/maps/geojson/AP_MUNICIPAL_${region}.geojson`);
-          const mun = resMun.ok ? await resMun.json() : null;
+        if (!activeLayer.geojsonUrl) {
+          setGeoJsonData(null);
+          setStyleData(null);
+          if (isMounted) setIsLoadingMap(false);
+          return;
+        }
 
-          if (isMounted) {
-            setApData({ nacional: nac, departamental: dep, municipal: mun });
-            setGeoJsonData(nac || mun);
-          }
-        } else {
-          if (!activeLayer.geojsonUrl) {
-            setGeoJsonData(null);
-            setStyleData(null);
-            if (isMounted) setIsLoadingMap(false);
-            return;
-          }
-
-          const fetchGeoJson = async () => {
+        const fetchGeoJson = async () => {
             const response = await fetch(activeLayer.geojsonUrl);
             let textData = await response.text(); // Leer como texto crudo
 
@@ -919,7 +1125,6 @@ export default function Explorador() {
               setStyleData(results[1]);
             }
           }
-        }
       } catch (error) {
         console.error("Error cargando los datos del mapa:", error);
       } finally {
@@ -1014,6 +1219,13 @@ export default function Explorador() {
     `);
   };
 
+  const capasAgrupadas = activeRegion.layers.reduce((acc, layer) => {
+    const cat = layer.category || 'Otras';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(layer);
+    return acc;
+  }, {} as Record<string, MapLayer[]>);
+
   return (
     <div className="h-[100dvh] w-full relative flex flex-col bg-surface overflow-hidden pt-16">
       {/* MAP CONTAINER */}
@@ -1056,43 +1268,13 @@ export default function Explorador() {
             />
           )}
 
-          {/* Render Áreas Protegidas Geometry */}
-          {!isLoadingMap && apData && activeLayer.id.includes('areas_protegidas') && (
-            <>
-              {apData.nacional && (
-                <GeoJSON
-                  key={`${activeLayer.id}-poly-nac`}
-                  data={apData.nacional}
-                  style={() => ({ fillColor: '#1B5E20', color: '#004D40', weight: 2, fillOpacity: 0.6 })}
-                  onEachFeature={handleOnEachFeature}
-                />
-              )}
-              {apData.departamental && (
-                <GeoJSON
-                  key={`${activeLayer.id}-poly-dep`}
-                  data={apData.departamental}
-                  style={() => ({ fillColor: '#2E8B57', color: '#1B5E20', weight: 2, fillOpacity: 0.6 })}
-                  onEachFeature={handleOnEachFeature}
-                />
-              )}
-              {apData.municipal && (
-                <GeoJSON
-                  key={`${activeLayer.id}-poly-mun`}
-                  data={apData.municipal}
-                  style={() => ({ fillColor: '#90EE90', color: '#2E8B57', weight: 2, fillOpacity: 0.5, dashArray: '4, 4' })}
-                  onEachFeature={handleOnEachFeature}
-                />
-              )}
-            </>
-          )}
-
           {/* Render Active Layer Geometry */}
-          {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && !activeLayer.id.includes('areas_protegidas') && (
+          {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && (
             <GeoJSON
               key={`${activeLayer.id}-poly`}
               data={geoJsonData}
               style={(feature) => {
-                const baseStyle = getLeafletStyle(feature, styleData);
+                const baseStyle = getLeafletStyle(feature, styleData, activeLayer.defaultStyle);
                 if (activeLayer.id.toLowerCase().includes('rios')) {
                   return {
                     ...baseStyle,
@@ -1194,7 +1376,7 @@ export default function Explorador() {
                     setActiveRegionKey(newRegion);
                     setActiveLayerId(macroRegions[newRegion].layers[0].id);
                   }}
-                  className="w-full bg-[#EBEBEB] border-2 border-outline-variant/30 rounded-2xl px-5 py-4 text-base font-black text-[#B0946D] appearance-none focus:outline-none focus:border-[#B0946D] focus:ring-4 focus:ring-[#B0946D]/10 transition-all cursor-pointer shadow-md group-hover:border-[#B0946D]/50"
+                  className="w-full border-2 border-outline-variant/30 rounded-2xl px-5 py-4 appearance-none focus:outline-none focus:border-[#664e82] focus:ring-4 focus:ring-[#664e82]/10 transition-all cursor-pointer shadow-md group-hover:border-[#664e82]/50 font-bold text-base text-[#664e82] bg-white uppercase tracking-wide"
                 >
                   {(Object.keys(macroRegions) as RegionKey[]).map((key) => (
                     <option key={key} value={key}>
@@ -1207,21 +1389,57 @@ export default function Explorador() {
                 </div>
               </div>
 
-              {/* Chips Selector de Capas */}
-              <div className="flex flex-wrap gap-2">
-                {activeRegion.layers.map(layer => (
-                  <button
-                    key={layer.id}
-                    onClick={() => setActiveLayerId(layer.id)}
-                    className={cn(
-                      "px-4 py-1.5 rounded-full text-xs transition-all border shadow-sm",
-                      activeLayerId === layer.id
-                        ? "bg-[#B0946D] text-white border-[#B0946D] font-black border-2 scale-105"
-                        : "bg-white text-[#4D4D4D] border-outline-variant/30 font-bold hover:bg-[#B0946D]/10 hover:border-[#B0946D]/30"
-                    )}
-                  >
-                    {layer.name}
-                  </button>
+              {/* Acordeón Selector de Capas */}
+              <div className="flex flex-col gap-2">
+                {Object.keys(capasAgrupadas).map(categoria => (
+                  <div key={categoria} className="flex flex-col border border-outline-variant/20 rounded-xl overflow-hidden bg-white/50">
+                    <button
+                      onClick={() => setCategoriaAbierta(categoriaAbierta === categoria ? null : categoria)}
+                      className="flex items-center justify-between w-full px-4 py-3 font-semibold text-xl text-gray-800 bg-white hover:text-[#664e82] transition-colors uppercase tracking-wider"
+                    >
+                      <span>{categoria}</span>
+                      <ChevronDown
+                        className={cn(
+                          "w-4 h-4 transition-transform",
+                          categoriaAbierta === categoria ? "rotate-180" : ""
+                        )}
+                      />
+                    </button>
+                    
+                    <AnimatePresence>
+                      {categoriaAbierta === categoria && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="flex flex-col gap-1 p-2"
+                        >
+                          {capasAgrupadas[categoria].map(layer => {
+                            const isActiva = activeLayerId === layer.id;
+                            return (
+                              <button
+                                key={layer.id}
+                                onClick={() => setActiveLayerId(layer.id)}
+                                className={cn(
+                                  "flex items-center justify-between w-full p-2 rounded-lg transition-all text-left",
+                                  isActiva
+                                    ? "bg-[#664e82]/10 text-[#664e82] font-medium border-l-4 border-[#664e82]"
+                                    : "bg-transparent text-gray-600 hover:bg-gray-50"
+                                )}
+                              >
+                                <span className="text-sm">{layer.productName}</span>
+                                {isActiva ? (
+                                  <div className="w-2 h-2 rounded-full bg-[#664e82] shrink-0" />
+                                ) : (
+                                  <div className="w-2 h-2 rounded-full border border-gray-300 shrink-0" />
+                                )}
+                              </button>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 ))}
               </div>
             </div>

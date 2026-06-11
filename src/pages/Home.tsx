@@ -212,14 +212,24 @@ export default function Home() {
             </div>
 
             <span className="text-on-surface-variant text-base md:text-lg font-medium italic opacity-80">
-              con el apoyo técnico de:
+              Con apoyo de:
             </span>
 
-            <div className="group transition-all">
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               <img
                 src="/images/icons/fao.png"
                 alt="FAO"
-                className="h-20 md:h-24 object-contain"
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+              />
+              <img
+                src="/images/icons/suecia.png"
+                alt="Suecia"
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+              />
+              <img
+                src="/images/icons/bosques.png"
+                alt="Bosques"
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
               />
             </div>
           </div>

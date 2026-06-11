@@ -1,0 +1,35 @@
+{
+  "name": "CUENCAS_N2_2014_SANTA_CRUZ",
+  "rules": [
+    {
+      "name": "46",
+      "filter": ["==", "NIVEL_2", "46"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#007bff",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "89",
+      "filter": ["==", "NIVEL_2", "89"],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#00ffa1",
+          "fillOpacity": 0.8,
+          "outlineColor": "#6480e4",
+          "outlineOpacity": 0,
+          "outlineWidth": 1,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

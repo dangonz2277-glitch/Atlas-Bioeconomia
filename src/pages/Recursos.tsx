@@ -17,6 +17,7 @@ interface Resource {
   typeBadge: "Mapa para el explorador" | "Documento de lectura (PDF)";
   tag: string;
   category: "Amazonía" | "Altiplano" | "Guía";
+  downloadUrl?: string;
   exploradorParams?: {
     region: string;
     layer: string;
@@ -48,7 +49,8 @@ const resources: Resource[] = [
     description: "Una introducción sencilla para entender cómo podemos cuidar la naturaleza mientras generamos desarrollo.",
     typeBadge: "Documento de lectura (PDF)",
     tag: "Lectura Educativa",
-    category: "Guía"
+    category: "Guía",
+    downloadUrl: "/documents/Manual_Usuario_Atlas_Bioeconomia_Bolivia.pdf"
   },
   {
     id: "comunidades-indigenas",
@@ -146,18 +148,36 @@ export default function Recursos() {
                     Ver en el Mapa
                   </button>
                 )}
-                <button 
-                  onClick={() => alert("La descarga comenzará pronto (Contenido de ejemplo)")}
-                  className={cn(
-                    "font-display w-full flex items-center justify-center gap-4 p-6 rounded-[2rem] font-black text-sm uppercase tracking-widest transition-all border-2",
-                    resource.exploradorParams 
-                      ? "border-outline-variant/10 text-[#4D4D4D] hover:bg-[#EBEBEB]" 
-                      : "bg-[#B0946D] text-white shadow-xl shadow-[#B0946D]/20 hover:scale-[1.02] active:scale-95 border-[#B0946D]"
-                  )}
-                >
-                  <Download className="w-5 h-5 opacity-40" />
-                  Descargar Material
-                </button>
+                {resource.downloadUrl ? (
+                  <a 
+                    href={resource.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className={cn(
+                      "font-display w-full flex items-center justify-center gap-4 p-6 rounded-[2rem] font-black text-sm uppercase tracking-widest transition-all border-2",
+                      resource.exploradorParams 
+                        ? "border-outline-variant/10 text-[#4D4D4D] hover:bg-[#EBEBEB]" 
+                        : "bg-[#B0946D] text-white shadow-xl shadow-[#B0946D]/20 hover:scale-[1.02] active:scale-95 border-[#B0946D]"
+                    )}
+                  >
+                    <Download className="w-5 h-5 opacity-40" />
+                    Descargar Material
+                  </a>
+                ) : (
+                  <button 
+                    onClick={() => alert("La descarga comenzará pronto (Contenido de ejemplo)")}
+                    className={cn(
+                      "font-display w-full flex items-center justify-center gap-4 p-6 rounded-[2rem] font-black text-sm uppercase tracking-widest transition-all border-2",
+                      resource.exploradorParams 
+                        ? "border-outline-variant/10 text-[#4D4D4D] hover:bg-[#EBEBEB]" 
+                        : "bg-[#B0946D] text-white shadow-xl shadow-[#B0946D]/20 hover:scale-[1.02] active:scale-95 border-[#B0946D]"
+                    )}
+                  >
+                    <Download className="w-5 h-5 opacity-40" />
+                    Descargar Material
+                  </button>
+                )}
               </div>
             </div>
           ))}
