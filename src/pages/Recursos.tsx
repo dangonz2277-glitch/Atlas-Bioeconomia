@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/src/lib/utils";
+import FuentesList from "@/src/components/FuentesList";
 
 interface Resource {
   id: string;
@@ -92,7 +93,7 @@ export default function Recursos() {
 
         {/* Simplified Filters (Pills) */}
         <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {["Todos", "Amazonía", "Altiplano", "Guías en PDF"].map((filter) => (
+          {["Todos", "Amazonía", "Altiplano", "Guías en PDF", "Fuentes y Metodología"].map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
@@ -108,11 +109,14 @@ export default function Recursos() {
           ))}
         </div>
 
-        {/* Resources Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          {filteredResources.map((resource) => (
-            <div 
-              key={resource.id} 
+        {/* Contenido Condicional */}
+        {activeFilter === "Fuentes y Metodología" ? (
+          <FuentesList />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            {filteredResources.map((resource) => (
+              <div 
+                key={resource.id} 
               className="bg-[#EFEAE2] rounded-[3.5rem] p-10 md:p-12 border border-outline-variant/10 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col h-full group"
             >
               <div className="flex items-start justify-between mb-8">
@@ -182,6 +186,7 @@ export default function Recursos() {
             </div>
           ))}
         </div>
+        )}
 
         {/* Friendly Footer */}
         <div className="mt-24 p-12 md:p-16 rounded-[4rem] bg-[#B0946D]/5 border-2 border-dashed border-[#B0946D]/30 flex flex-col items-center text-center">
