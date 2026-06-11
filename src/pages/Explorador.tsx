@@ -27,7 +27,8 @@ import {
   Users,
   AlertCircle,
   ArrowRight,
-  Loader2
+  Loader2,
+  MapPin
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
@@ -993,6 +994,7 @@ export default function Explorador() {
   const navigate = useNavigate();
 
   const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -1228,6 +1230,15 @@ export default function Explorador() {
 
   return (
     <div className="h-[100dvh] w-full relative flex flex-col bg-surface overflow-hidden pt-16">
+      {/* Botón Flotante (Solo Móvil) */}
+      <button
+        onClick={() => setIsMobileMenuOpen(true)}
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[1000] flex md:hidden items-center justify-center gap-2 bg-[#B0946D] text-white px-6 py-3 rounded-full font-black uppercase tracking-widest shadow-2xl border-2 border-[#B0946D]/50 active:scale-95 transition-transform"
+      >
+        <MapPin className="w-5 h-5" />
+        Explorar Capas
+      </button>
+
       {/* MAP CONTAINER */}
       <div className="absolute inset-0 z-0 top-16">
         <MapContainer
@@ -1351,7 +1362,15 @@ export default function Explorador() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -450, opacity: 0 }}
             transition={{ type: "spring", damping: 30, stiffness: 200 }}
-            className="fixed left-4 top-24 bottom-4 w-[calc(100%-2rem)] sm:w-[450px] bg-[#EFEAE2]/95 backdrop-blur-md z-40 rounded-[2.5rem] shadow-2xl border border-outline-variant/20 flex flex-col overflow-hidden"
+            className={cn(
+              "flex flex-col overflow-hidden transition-all duration-300",
+              // Móvil: Modal a pantalla completa controlado por isMobileMenuOpen
+              isMobileMenuOpen 
+                ? "fixed inset-0 z-[2000] overflow-y-auto bg-[#EBEBEB] p-4" 
+                : "hidden",
+              // Escritorio: Flotante habitual ignorando el estado móvil
+              "md:flex md:fixed md:left-4 md:top-24 md:bottom-4 md:w-[450px] md:bg-[#EFEAE2]/95 md:backdrop-blur-md md:z-40 md:rounded-[2.5rem] md:shadow-2xl md:border md:border-outline-variant/20 md:p-0 md:inset-auto"
+            )}
           >
             {/* Top Selector Section */}
             <div className="p-8 bg-gradient-to-b from-[#654D81]/5 to-transparent border-b border-outline-variant/10">
@@ -1361,8 +1380,8 @@ export default function Explorador() {
                   <span className="text-[10px] font-bold text-[#654D81]/85 uppercase tracking-[0.2em]">Atlas Bioeconómico</span>
                 </div>
                 <button
-                  onClick={() => setIsPanelOpen(false)}
-                  className="p-2 hover:bg-[#654D81]/5 rounded-full text-[#4D4D4D] md:hidden"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 hover:bg-[#654D81]/5 rounded-full text-[#4D4D4D] flex md:hidden"
                 >
                   <X className="w-5 h-5" />
                 </button>

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center overflow-hidden bg-[#EBEBEB]">
+      <section className="relative min-h-[100dvh] md:min-h-[90vh] md:h-[90vh] pb-16 md:pb-0 flex items-center overflow-hidden bg-[#EBEBEB]">
         <div className="absolute inset-0 z-0 select-none">
           <img
             alt="Bolivian Landscape"
@@ -17,14 +17,14 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent z-[1]" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 md:pt-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl bg-transparent"
           >
-            <div className="bg-white p-2 md:p-3 w-fit mb-8 mt-24 md:mt-0 rounded-lg">
+            <div className="bg-white p-2 md:p-3 w-fit mb-8 md:mb-12 rounded-lg">
               <img
                 src="/images/icons/ministerio.png"
                 alt="Ministerio de Medio Ambiente y Agua"
@@ -51,7 +51,7 @@ export default function Home() {
       </section>
 
       {/* Bloque de Datos Destacados */}
-      <section className="py-16 bg-[#EBEBEB] relative z-20 -mt-10">
+      <section className="py-16 bg-[#EBEBEB] relative z-20 mt-0 md:-mt-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
