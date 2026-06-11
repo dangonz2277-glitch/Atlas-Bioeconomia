@@ -1,0 +1,43 @@
+{
+  "name": "SITIOS_RAMSAR_2018_AMAZONIA",
+  "rules": [
+    {
+      "name": "RÍO MATOS",
+      "filter": [
+        "==",
+        "NOM_SRM",
+        "RÍO MATOS"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#457428",
+          "fillOpacity": 0.9,
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "RÍO YATA",
+      "filter": [
+        "==",
+        "NOM_SRM",
+        "RÍO YATA"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#bcdc3c",
+          "fillOpacity": 0.9,
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

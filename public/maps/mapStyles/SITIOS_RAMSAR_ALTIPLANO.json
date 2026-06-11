@@ -1,0 +1,62 @@
+{
+  "name": "SITIOS_RAMSAR_2018_ALTIPLANO",
+  "rules": [
+    {
+      "name": "LAGO TITICACA",
+      "filter": [
+        "==",
+        "NOM_SRM",
+        "LAGO TITICACA"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1f78b4",
+          "fillOpacity": 0.9,
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "LAGOS POOPÓ Y URU URU",
+      "filter": [
+        "==",
+        "NOM_SRM",
+        "LAGOS POOPÓ Y URU URU"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#1f78b4",
+          "fillOpacity": 0.9,
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    },
+    {
+      "name": "LOS LÍPEZ",
+      "filter": [
+        "==",
+        "NOM_SRM",
+        "LOS LÍPEZ"
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#2e9820",
+          "fillOpacity": 0.9,
+          "outlineColor": "#232323",
+          "outlineWidth": 1,
+          "outlineOpacity": 0,
+          "outlineJoin": "bevel"
+        }
+      ]
+    }
+  ]
+}

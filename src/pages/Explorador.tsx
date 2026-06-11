@@ -234,11 +234,44 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/RIOS_PRIN_AMAZONIA_2003_simplified.geojson",
         styleUrl: "/maps/mapStyles/RIOS_PRIN_AMAZONIA.json"
+      },
+      {
+        id: "amazon-areas_protegidas",
+        name: "Áreas Protegidas",
+        productName: "Áreas Protegidas",
+        badge: "Conservación",
+        color: "#1B5E20",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas nacionales, departamentales y municipales de la Amazonía.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Deforestación", "Asentamientos irregulares"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: ""
+      },
+      {
+        id: "amazon-sitios_ramsar",
+        name: "Sitios Ramsar",
+        productName: "Sitios Ramsar",
+        badge: "Humedales",
+        color: "#1f78b4",
+        stats: [],
+        technicalInfo: {
+          context: "Humedales de importancia internacional para la regulación hídrica.",
+          social: "Conservación de biodiversidad acuática.",
+          challenges: ["Contaminación", "Cambio climático"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/SITIOS_RAMSAR_2018_AMAZONIA.geojson",
+        styleUrl: "/maps/mapStyles/SITIOS_RAMSAR_AMAZONIA.json"
       }
     ]
   },
   "Santa Cruz": {
-    name: "Santa Cruz",
+    name: "Santa Cruz (Municipio de San Ignacio)",
     center: [-17.0, -60.0],
     zoom: 7,
     layers: [
@@ -312,6 +345,38 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/RIOS_PRIN_SANTA_CRUZ_2003.geojson",
         styleUrl: "/maps/mapStyles/RIOS_PRIN_SANTA_CRUZ.json"
+      },
+      {
+        id: "sc-areas_protegidas",
+        name: "Áreas Protegidas",
+        productName: "Áreas Protegidas",
+        badge: "Conservación",
+        color: "#1B5E20",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas nacionales y municipales de Santa Cruz.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Incendios", "Expansión agrícola"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: ""
+      },
+      {
+        id: "sc-sitios_ramsar",
+        name: "Sitios Ramsar",
+        productName: "Sitios Ramsar",
+        badge: "Humedales",
+        color: "#1f78b4",
+        stats: [],
+        technicalInfo: {
+          context: "Actualmente, el visor espacial de Sitios Ramsar se enfoca en las cuencas de la Amazonía y el Altiplano.",
+          social: "N/A",
+          challenges: []
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: ""
       }
     ]
   },
@@ -395,6 +460,39 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         geometryType: 'polygon',
         geojsonUrl: "/maps/geojson/RIOS_PRIN_ALTIPLANO_2003_simplified.geojson",
         styleUrl: "/maps/mapStyles/RIOS_PRIN_ALTIPLANO.json"
+      },
+      {
+        id: "altiplano-areas_protegidas",
+        name: "Áreas Protegidas",
+        productName: "Áreas Protegidas",
+        badge: "Conservación",
+        color: "#1B5E20",
+        stats: [],
+        technicalInfo: {
+          context: "Áreas protegidas nacionales, departamentales y municipales del Altiplano.",
+          social: "Conservación de biodiversidad y territorios.",
+          challenges: ["Cambio climático"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: ""
+      },
+      {
+        id: "altiplano-sitios_ramsar",
+        name: "Sitios Ramsar",
+        productName: "Sitios Ramsar",
+        badge: "Humedales",
+        color: "#1f78b4",
+        stats: [],
+        technicalInfo: {
+          context: "Humedales de importancia internacional para la regulación hídrica.",
+          social: "Conservación de ecosistemas acuáticos andinos.",
+          challenges: ["Minería", "Reducción de cuerpos de agua"]
+        },
+        gallery: [],
+        geometryType: 'polygon',
+        geojsonUrl: "/maps/geojson/SITIOS_RAMSAR_2018_ALTIPLANO.geojson",
+        styleUrl: "/maps/mapStyles/SITIOS_RAMSAR_ALTIPLANO.json"
       }
     ]
   }
@@ -424,11 +522,119 @@ const customMarkerIcon = (color: string) => L.divIcon({
   iconAnchor: [7, 7]
 });
 
-const LAYER_STATS: Record<string, {
-  titulo: string;
-  estadisticas: { icono: string; label: string; valor: string }[];
-  graficos: { label: string; porcentaje: number; color: string }[];
-}> = {
+const LAYER_STATS: any = {
+  amazonia: {
+    sitios_ramsar: {
+      titulo: "Humedales",
+      descripcion: "Los humedales son lugares que están cubiertos temporal o permanentemente de agua dulce o salada. Algunos pueden ser profundos y otros poco profundos. Muchos humedales están cubiertos por vegetación y son hogar de animales grandes y pequeños. Los ríos y arroyos, pantanos, curichis, palmares, lagos y lagunas, bofedales y turberas son humedales. En época de lluvia, muchas pampas y sabanas se inundan temporalmente, convirtiéndose en humedales. Esto da lugar a que peces y otros pequeños animales acuáticos lleguen a estos lugares a cumplir parte de su ciclo de vida, por ejemplo, los procesos de reproducción o fases de crecimiento.",
+      importancia: "Los humedales son importantes porque brindan una variedad de servicios que benefician a la humanidad, entre ellos, la filtración del agua, el control de inundaciones, la captura de dióxido de carbono, la provisión de alimentos y recursos que sostienen la economía de las familias. Además, son el hogar de una diversidad de especies de animales: mamíferos, aves, peces e invertebrados.",
+      amenazas: "Aunque son uno de los ecosistemas más productivos e importantes del mundo, los humedales están desapareciendo. Muchas de las amenazas y causas de su desaparición son: Cambio de uso del suelo, deforestación, contrucción de grandes infraestructuras, contaminación.",
+      estadisticas: [
+        { icono: "💧", label: "Humedales Nacionales", valor: "11" },
+        { icono: "🐦", label: "Importancia", valor: "Global" }
+      ],
+      listaSitios: ["Río Yata", "Río Blanco", "Río Matos", "Pantanal Boliviano", "Bañados del Izozog y Río Parapeti", "Laguna Concepción"],
+      graficos: []
+    },
+    bosques: {
+      titulo: "Resumen de Bosques",
+      descripcion: "El bioma amazónico en Bolivia cubre una superficie de 478,405 km², lo que representa aproximadamente el 67% de la cuenca amazónica boliviana. Según la clasificación de la Red Amazónica de Información Socioambiental Georreferenciada (RAISG, 2022), la Amazonía es el bioma más extenso de Bolivia, en contraste con los otros cuatro presentes en el territorio nacional: Andes, Chaco, Chiquitanía y Tucumano-boliviano. Este bioma se caracteriza por una gran diversidad de paisajes, que van desde bosques siempre verdes hasta un complejo mosaico de sabanas arboladas y pasturas naturales. Su fisiografía abarca desde zonas de alta montaña, que alcanzan los 4.200 m s. n. m., hasta regiones planas y onduladas, con altitudes que no superan los 300 m s. n. m.",
+      estadisticas: [
+        { icono: "🌳", label: "Tipos de bosque", valor: "7" },
+        { icono: "🌴", label: "Especies dominantes", valor: "Múltiples" },
+        { icono: "📍", label: "Áreas de aprovechamiento", valor: "Activas" },
+        { icono: "🛡️", label: "Áreas Nacionales", valor: "5" }
+      ],
+      graficos: []
+    },
+    areas_potenciales: {
+      titulo: "Potencial Productivo",
+      descripcion: "El Asaí es el fruto de la palmera Euterpe precatoria, una especie nativa de la Amazonía que se diferencia del Asaí cultivado en otros países por su carácter silvestre y su adaptación natural a los ecosistemas amazónicos. Históricamente, el Asaí ha sido utilizado por los pueblos indígenas como alimento, bebida energética y recurso medicinal, formando parte de su identidad cultural y de sus prácticas alimentarias tradicionales.",
+      estadisticas: [
+        { icono: "📈", label: "Rendimiento", valor: "Alto" }
+      ],
+      graficos: [
+        { label: "Viabilidad", porcentaje: 85, color: "bg-[#654D81]" }
+      ]
+    },
+    comunidades: {
+      titulo: "Datos Demográficos",
+      descripcion: "En la cadena de valor de la fruta del Asaí participan diversos actores con roles diferenciados. En la base se encuentran las comunidades indígenas y campesinas recolectoras, responsables de la cosecha de la fruta y del manejo tradicional del bosque. Estas comunidades suelen organizarse en asociaciones y organizaciones económicas comunitarias, lo que facilita el acceso a infraestructura, proyectos y mercados.",
+      estadisticas: [
+        { icono: "🏘️", label: "Comunidades Totales", valor: "XXX" },
+        { icono: "👥", label: "Municipios Vinculados", valor: "98" },
+        { icono: "🏡", label: "Áreas Municipales", valor: "46" },
+        { icono: "🗺️", label: "Áreas Departamentales", valor: "9" }
+      ],
+      graficos: [
+        { label: "Participación Comunitaria", porcentaje: 75, color: "bg-[#B0946D]" }
+      ]
+    }
+  },
+  altiplano: {
+    sitios_ramsar: {
+      titulo: "Sitios Ramsar Altoandinos",
+      descripcion: "Se denominan sitios Ramsar a los humedales que brindan servicios y recursos vitales al mundo. Son de importancia internacional, ya que especies como aves y peces migratorios cumplen gran parte de su ciclo de vida en estos sitios, donde se alimentan, descansan y se reproducen. Bolivia es parte de la Convención Ramsar desde 1990.",
+      estadisticas: [
+        { icono: "💧", label: "Humedales Nacionales", valor: "11" },
+        { icono: "🦩", label: "Importancia", valor: "Global" }
+      ],
+      listaSitios: ["Lago Titicaca", "Uru Uru", "Los Lípez", "Cuenca del Tajzara", "Salinas de San José"],
+      graficos: []
+    },
+    bosques: {
+      titulo: "Resumen de Bosques",
+      descripcion: "El Altiplano Sur, una región caracterizada por condiciones biofísicas extremas que han moldeado sistemas productivos altamente adaptativos. Este territorio se sitúa a altitudes que oscilan entre los 3.600 y más de 4.000 metros sobre el nivel del mar, con climas áridos y semiáridos, precipitaciones anuales reducidas y una marcada variabilidad climática. Los suelos del Altiplano Sur son predominantemente arenosos, con bajo contenido de materia orgánica y, en muchos casos, con presencia de salinidad.",
+      estadisticas: [
+        { icono: "🌳", label: "Tipos de bosque", valor: "7" },
+        { icono: "🌴", label: "Especies dominantes", valor: "Múltiples" },
+        { icono: "📍", label: "Áreas de aprovechamiento", valor: "Activas" },
+        { icono: "🛡️", label: "Áreas Nacionales", valor: "5" }
+      ],
+      graficos: []
+    },
+    produccion_quinua: {
+      titulo: "Rendimiento Agrícola",
+      descripcion: "La quinua es un pseudocereal originario de los Andes, cultivado desde hace más de cinco mil años por las civilizaciones prehispánicas. Su importancia trasciende lo alimentario, constituyéndose en un elemento central de la cosmovisión andina y de los sistemas agrícolas tradicionales. Bolivia conserva una amplia diversidad genética de quinua, con múltiples ecotipos adaptados a distintos pisos ecológicos. La Quinua Real, producida en el Altiplano Sur, es especialmente valorada por el tamaño de su grano y sus características organolépticas, lo que refuerza su posicionamiento en mercados especializados.",
+      estadisticas: [
+        { icono: "🌾", label: "Producción", valor: "Premium" }
+      ],
+      graficos: [
+        { label: "Calidad", porcentaje: 95, color: "bg-[#B0946D]" }
+      ]
+    },
+    comunidades: {
+      titulo: "Datos Demográficos",
+      descripcion: "La cadena de valor de la quinua involucra a una diversidad de actores públicos, privados y comunitarios que interactúan de manera interdependiente. En la base de la cadena se encuentran los pequeños productores y comunidades indígenas, quienes mantienen y transmiten conocimientos ancestrales asociados al cultivo. Las organizaciones de productores, cooperativas y asociaciones desempeñan un rol clave en la agregación de valor, el acceso a certificaciones y la comercialización conjunta.",
+      estadisticas: [
+        { icono: "🏘️", label: "Comunidades Totales", valor: "XXX" },
+        { icono: "👥", label: "Municipios Vinculados", valor: "98" },
+        { icono: "🏡", label: "Áreas Municipales", valor: "46" },
+        { icono: "🗺️", label: "Áreas Departamentales", valor: "9" }
+      ],
+      graficos: [
+        { label: "Participación Comunitaria", porcentaje: 75, color: "bg-[#B0946D]" }
+      ]
+    }
+  },
+  santa_cruz: {
+    sitios_ramsar: {
+      titulo: "Sitios Ramsar en Bolivia",
+      descripcion: "Se denominan sitios Ramsar a los humedales que brindan servicios y recursos vitales al mundo. Actualmente, el visor espacial enfoca la carga de datos en las cuencas íntegras de la Amazonía y el Altiplano.",
+      estadisticas: [
+        { icono: "💧", label: "Humedales Nacionales", valor: "11" },
+        { icono: "🌍", label: "Importancia", valor: "Global" }
+      ],
+      listaSitios: ["Pantanal Boliviano", "Laguna Concepción", "Bañados del Izozog y Río Parapeti", "Palmar de las Islas"],
+      graficos: []
+    }
+  },
+  areas_protegidas: {
+    titulo: "Áreas Protegidas",
+    descripcion: "Zonas de alta biodiversidad resguardadas mediante categorías de protección nacional, departamental y municipal.",
+    estadisticas: [],
+    graficos: []
+  },
   rios: {
     titulo: "Resumen Hidrológico",
     estadisticas: [
@@ -488,7 +694,44 @@ const getStatsKey = (layerId: string) => {
   if (layerId.includes('comunidades')) return 'comunidades';
   if (layerId.includes('asai')) return 'areas_potenciales';
   if (layerId.includes('quinua')) return 'produccion_quinua';
+  if (layerId.includes('areas_protegidas')) return 'areas_protegidas';
+  if (layerId.includes('sitios_ramsar')) return 'sitios_ramsar';
   return 'bosques';
+};
+
+// Función robusta para asegurar que el panel izquierdo siempre encuentre los datos
+const obtenerDatosCapa = (region: string, capa: string) => {
+  if (!region || !capa || !LAYER_STATS) return null;
+  
+  // Normalizamos el texto (quitamos espacios, tildes y pasamos a minúsculas)
+  const regionNormalizada = region
+    .toLowerCase()
+    .trim()
+    .replace(" ", "_")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  
+  // Primero intentamos buscar con la llave normalizada (ej. 'santa_cruz' o 'amazonia')
+  // @ts-ignore
+  if (LAYER_STATS[regionNormalizada] && LAYER_STATS[regionNormalizada][capa]) {
+    // @ts-ignore
+    return LAYER_STATS[regionNormalizada][capa];
+  }
+  
+  // Si no existe un nodo independiente para santa_cruz (debido al rollback), 
+  // forzamos temporalmente a que lea los datos base para que el panel no quede vacío
+  // @ts-ignore
+  if (regionNormalizada === "santa_cruz" && LAYER_STATS["amazonia"]) {
+    // @ts-ignore
+    return LAYER_STATS["amazonia"][capa];
+  }
+
+  // Fallback para diccionarios de un solo nivel (si LAYER_STATS no está dividido por regiones)
+  if (LAYER_STATS[capa]) {
+      return LAYER_STATS[capa];
+  }
+
+  return null;
 };
 
 // --- COMPONENTS ---
@@ -553,6 +796,7 @@ export default function Explorador() {
 
   // Map Data State
   const [geoJsonData, setGeoJsonData] = useState<any>(null);
+  const [apData, setApData] = useState<{nacional: any, departamental: any, municipal: any} | null>(null);
   const [styleData, setStyleData] = useState<any>(null);
   const [isLoadingMap, setIsLoadingMap] = useState<boolean>(false);
   const [limiteGeoJson, setLimiteGeoJson] = useState<any>(null);
@@ -600,6 +844,7 @@ export default function Explorador() {
 
   const activeRegion = macroRegions[activeRegionKey];
   const activeLayer = activeRegion.layers.find(l => l.id === activeLayerId) || activeRegion.layers[0];
+  const dataActual = obtenerDatosCapa(activeRegionKey, getStatsKey(activeLayer.id));
 
   useEffect(() => {
     setCurrentImageIndex(0);
@@ -613,37 +858,66 @@ export default function Explorador() {
       setIsLoadingMap(true);
       setGeoJsonData(null);
       setStyleData(null);
+      setApData(null);
 
       try {
-        const fetchGeoJson = async () => {
-          const response = await fetch(activeLayer.geojsonUrl);
-          let textData = await response.text(); // Leer como texto crudo
+        if (activeLayer.id.includes('areas_protegidas')) {
+          const region = activeRegionKey === "Amazonía" ? "AMAZONIA" : activeRegionKey === "Altiplano" ? "ALTIPLANO" : "SANTA_CRUZ";
+          
+          const resNac = await fetch(`/maps/geojson/AP_NACIONAL_${region}.geojson`);
+          const nac = resNac.ok ? await resNac.json() : null;
+          
+          let dep = null;
+          if (region !== "SANTA_CRUZ") {
+            const resDep = await fetch(`/maps/geojson/AP_DEPARTAMENTAL_${region}.geojson`);
+            dep = resDep.ok ? await resDep.json() : null;
+          }
+          
+          const resMun = await fetch(`/maps/geojson/AP_MUNICIPAL_${region}.geojson`);
+          const mun = resMun.ok ? await resMun.json() : null;
 
-          // Sanitización de palabras corruptas conocidas originadas en el SIG
-          textData = textData
-            .replace(/Amaznico/g, 'Amazónico')
-            .replace(/Amaznico/g, 'Amazónico')
-            .replace(/Hmedo/g, 'Húmedo')
-            .replace(/Hmedo/g, 'Húmedo')
-            .replace(/Preandino/g, 'Preandino'); // Agrega aquí cualquier otra si es necesario
+          if (isMounted) {
+            setApData({ nacional: nac, departamental: dep, municipal: mun });
+            setGeoJsonData(nac || mun);
+          }
+        } else {
+          if (!activeLayer.geojsonUrl) {
+            setGeoJsonData(null);
+            setStyleData(null);
+            if (isMounted) setIsLoadingMap(false);
+            return;
+          }
 
-          return JSON.parse(textData);
-        };
+          const fetchGeoJson = async () => {
+            const response = await fetch(activeLayer.geojsonUrl);
+            let textData = await response.text(); // Leer como texto crudo
 
-        const promises: Promise<any>[] = [
-          fetchGeoJson()
-        ];
+            // Sanitización de palabras corruptas conocidas originadas en el SIG
+            textData = textData
+              .replace(/Amaznico/g, 'Amazónico')
+              .replace(/Amaznico/g, 'Amazónico')
+              .replace(/Hmedo/g, 'Húmedo')
+              .replace(/Hmedo/g, 'Húmedo')
+              .replace(/Preandino/g, 'Preandino'); // Agrega aquí cualquier otra si es necesario
 
-        if (activeLayer.styleUrl) {
-          promises.push(fetch(activeLayer.styleUrl).then(res => res.json()));
-        }
+            return JSON.parse(textData);
+          };
 
-        const results = await Promise.all(promises);
+          const promises: Promise<any>[] = [
+            fetchGeoJson()
+          ];
 
-        if (isMounted) {
-          setGeoJsonData(results[0]);
-          if (activeLayer.styleUrl && results[1]) {
-            setStyleData(results[1]);
+          if (activeLayer.styleUrl) {
+            promises.push(fetch(activeLayer.styleUrl).then(res => res.json()));
+          }
+
+          const results = await Promise.all(promises);
+
+          if (isMounted) {
+            setGeoJsonData(results[0]);
+            if (activeLayer.styleUrl && results[1]) {
+              setStyleData(results[1]);
+            }
           }
         }
       } catch (error) {
@@ -670,6 +944,74 @@ export default function Explorador() {
   const prevImage = () => {
     if (activeLayer.gallery.length === 0) return;
     setCurrentImageIndex((prev) => (prev - 1 + activeLayer.gallery.length) % activeLayer.gallery.length);
+  };
+
+  const handleOnEachFeature = (feature: any, layer: any) => {
+    const name = feature.properties?.name || feature.properties?.NOMBRE || activeLayer.name;
+    
+    if (activeLayer.id.toLowerCase().includes('rios')) {
+      const nombreRio = feature.properties?.NOMBRE || feature.properties?.NOM_RIO || feature.properties?.NOM_CURSO || "Río Principal";
+      layer.bindTooltip(nombreRio, {
+        sticky: true,
+        direction: 'auto',
+        className: 'custom-river-tooltip'
+      });
+    }
+
+    if (activeLayer.id.toLowerCase().includes('sitios_ramsar')) {
+      const p = feature.properties;
+      const sitioName = p["NOM_SRM"] || p["NOM SRM"] || p["NOMBRE"] || name || "Sitio Ramsar";
+      const dep = p["dep"] || p["DEP"] || "No especificado";
+      const prov = p["prov"] || p["PROV"] || "No especificada";
+      const mun = p["mun"] || p["MUN"] || "No especificado";
+      
+      const ramsarPropsHtml = `
+        <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
+          <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">Departamento:</span>
+          <span class="text-xs text-gray-800 text-right break-words">${dep}</span>
+        </li>
+        <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
+          <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">Provincia:</span>
+          <span class="text-xs text-gray-800 text-right break-words">${prov}</span>
+        </li>
+        <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
+          <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">Municipio:</span>
+          <span class="text-xs text-gray-800 text-right break-words">${mun}</span>
+        </li>
+      `;
+
+      layer.bindPopup(`
+        <div class="p-2 min-w-[220px] max-w-[300px] bg-white rounded-lg">
+          <h4 class="m-0 mb-2 font-bold text-[#654D81] font-sans text-sm border-b pb-1">${sitioName}</h4>
+          <p class="m-0 mb-3 text-[11px] text-gray-500">Capa: ${activeLayer.name}</p>
+          <ul class="m-0 p-0 list-none max-h-[200px] overflow-y-auto pr-1">
+            ${ramsarPropsHtml}
+          </ul>
+        </div>
+      `);
+      return;
+    }
+
+    const ignoreKeys = ['OBJECTID', 'Shape_Length', 'Shape_Area', 'ID', 'FID'];
+    const props = Object.entries(feature.properties || {})
+      .filter(([key, value]) => !ignoreKeys.includes(key) && value !== null && value !== '');
+    
+    const propsHtml = props.map(([key, value]) => `
+      <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
+        <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">${key.replace(/_/g, ' ')}:</span>
+        <span class="text-xs text-gray-800 text-right break-words">${value}</span>
+      </li>
+    `).join('');
+
+    layer.bindPopup(`
+      <div class="p-2 min-w-[220px] max-w-[300px] bg-white rounded-lg">
+        <h4 class="m-0 mb-2 font-bold text-[#654D81] font-sans text-sm border-b pb-1">${name}</h4>
+        <p class="m-0 mb-3 text-[11px] text-gray-500">Capa: ${activeLayer.name}</p>
+        <ul class="m-0 p-0 list-none max-h-[200px] overflow-y-auto pr-1">
+          ${propsHtml}
+        </ul>
+      </div>
+    `);
   };
 
   return (
@@ -714,8 +1056,38 @@ export default function Explorador() {
             />
           )}
 
+          {/* Render Áreas Protegidas Geometry */}
+          {!isLoadingMap && apData && activeLayer.id.includes('areas_protegidas') && (
+            <>
+              {apData.nacional && (
+                <GeoJSON
+                  key={`${activeLayer.id}-poly-nac`}
+                  data={apData.nacional}
+                  style={() => ({ fillColor: '#1B5E20', color: '#004D40', weight: 2, fillOpacity: 0.6 })}
+                  onEachFeature={handleOnEachFeature}
+                />
+              )}
+              {apData.departamental && (
+                <GeoJSON
+                  key={`${activeLayer.id}-poly-dep`}
+                  data={apData.departamental}
+                  style={() => ({ fillColor: '#2E8B57', color: '#1B5E20', weight: 2, fillOpacity: 0.6 })}
+                  onEachFeature={handleOnEachFeature}
+                />
+              )}
+              {apData.municipal && (
+                <GeoJSON
+                  key={`${activeLayer.id}-poly-mun`}
+                  data={apData.municipal}
+                  style={() => ({ fillColor: '#90EE90', color: '#2E8B57', weight: 2, fillOpacity: 0.5, dashArray: '4, 4' })}
+                  onEachFeature={handleOnEachFeature}
+                />
+              )}
+            </>
+          )}
+
           {/* Render Active Layer Geometry */}
-          {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && (
+          {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && !activeLayer.id.includes('areas_protegidas') && (
             <GeoJSON
               key={`${activeLayer.id}-poly`}
               data={geoJsonData}
@@ -739,39 +1111,7 @@ export default function Explorador() {
                   fillOpacity: 0.9
                 });
               }}
-              onEachFeature={(feature, layer) => {
-                const name = feature.properties?.name || feature.properties?.NOMBRE || activeLayer.name;
-                
-                if (activeLayer.id.toLowerCase().includes('rios')) {
-                  const nombreRio = feature.properties?.NOMBRE || feature.properties?.NOM_RIO || feature.properties?.NOM_CURSO || "Río Principal";
-                  layer.bindTooltip(nombreRio, {
-                    sticky: true,
-                    direction: 'auto',
-                    className: 'custom-river-tooltip'
-                  });
-                }
-
-                const ignoreKeys = ['OBJECTID', 'Shape_Length', 'Shape_Area', 'ID', 'FID'];
-                const props = Object.entries(feature.properties || {})
-                  .filter(([key, value]) => !ignoreKeys.includes(key) && value !== null && value !== '');
-                
-                const propsHtml = props.map(([key, value]) => `
-                  <li class="flex justify-between items-start py-1.5 border-b border-gray-100 last:border-0 gap-4">
-                    <span class="text-xs font-semibold text-gray-600 capitalize shrink-0">${key.replace(/_/g, ' ')}:</span>
-                    <span class="text-xs text-gray-800 text-right break-words">${value}</span>
-                  </li>
-                `).join('');
-
-                layer.bindPopup(`
-                  <div class="p-2 min-w-[220px] max-w-[300px] bg-white rounded-lg">
-                    <h4 class="m-0 mb-2 font-bold text-[#654D81] font-sans text-sm border-b pb-1">${name}</h4>
-                    <p class="m-0 mb-3 text-[11px] text-gray-500">Capa: ${activeLayer.name}</p>
-                    <ul class="m-0 p-0 list-none max-h-[200px] overflow-y-auto pr-1">
-                      ${propsHtml}
-                    </ul>
-                  </div>
-                `);
-              }}
+              onEachFeature={handleOnEachFeature}
             />
           )}
 
@@ -858,7 +1198,7 @@ export default function Explorador() {
                 >
                   {(Object.keys(macroRegions) as RegionKey[]).map((key) => (
                     <option key={key} value={key}>
-                      {key}
+                      {macroRegions[key].name}
                     </option>
                   ))}
                 </select>
@@ -888,11 +1228,11 @@ export default function Explorador() {
 
             <div className="flex-grow overflow-y-auto custom-scrollbar flex flex-col">
               <div className="p-8 pb-6">
-                {activeBioKey && bioeconomyData[activeBioKey] ? (
+                {dataActual ? (
                   <>
                     <div className="flex flex-col gap-1 mb-6">
                       <div className="flex items-center gap-3 mb-1">
-                        <h2 className="font-display text-5xl font-black text-[#654D81] tracking-tighter leading-none">{bioeconomyData[activeBioKey].titulo}</h2>
+                        <h2 className="font-display text-5xl font-black text-[#654D81] tracking-tighter leading-none">{dataActual.titulo}</h2>
                       </div>
                       <div className="font-display inline-block px-3 py-1 bg-[#654D81]/10 text-[#654D81] rounded-lg text-[10px] font-bold uppercase tracking-widest border border-[#654D81]/20 h-fit w-fit mt-1">
                         {activeLayer.badge}
@@ -902,10 +1242,10 @@ export default function Explorador() {
                       )}
                     </div>
 
-                    {LAYER_STATS[getStatsKey(activeLayer.id)]?.estadisticas.length > 0 && (
+                    {dataActual.estadisticas?.length > 0 && (
                       <div className="grid grid-cols-2 gap-4 my-6">
                         <AnimatePresence mode="popLayout">
-                          {LAYER_STATS[getStatsKey(activeLayer.id)].estadisticas.map((stat, i) => (
+                          {dataActual.estadisticas.map((stat: any, i: number) => (
                             <motion.div
                               key={`${activeLayer.id}-stat-${i}`}
                               initial={{ opacity: 0, y: 15 }}
@@ -922,9 +1262,9 @@ export default function Explorador() {
                       </div>
                     )}
                     
-                    {LAYER_STATS[getStatsKey(activeLayer.id)]?.graficos.length > 0 && (
+                    {dataActual.graficos?.length > 0 && (
                       <div className="space-y-4 mb-8">
-                        {LAYER_STATS[getStatsKey(activeLayer.id)].graficos.map((graf, idx) => (
+                        {dataActual.graficos.map((graf: any, idx: number) => (
                           <div key={idx} className="space-y-2">
                             <div className="flex justify-between text-[10px] font-bold text-[#654D81] uppercase tracking-wide">
                               <span>{graf.label}</span>
@@ -948,7 +1288,43 @@ export default function Explorador() {
                             exit={{ opacity: 0, y: -10 }}
                             className="text-sm text-[#4D4D4D] leading-relaxed p-1"
                           >
-                            <p className="mb-4">{bioeconomyData[activeBioKey].descripcion}</p>
+                            <p className="mb-4">{(dataActual as any).descripcion || (activeBioKey && bioeconomyData[activeBioKey]?.descripcion) || activeLayer.technicalInfo?.context || "Descripción no disponible."}</p>
+
+                            {/* Renderizado dinámico de Importancia */}
+                            {(dataActual as any)?.importancia && (
+                              <div className="mt-4 p-4 bg-blue-50/80 border border-blue-200 rounded-xl text-sm text-blue-900 shadow-sm animate-fade-in-up">
+                                <h4 className="font-bold mb-1 flex items-center gap-2"><span className="text-blue-500">ℹ️</span> Importancia</h4>
+                                <p>{(dataActual as any).importancia}</p>
+                              </div>
+                            )}
+
+                            {/* Renderizado dinámico de Amenazas */}
+                            {(dataActual as any)?.amenazas && (
+                              <div className="mt-4 p-4 bg-red-50/80 border border-red-200 rounded-xl text-sm text-red-900 shadow-sm animate-fade-in-up">
+                                <h4 className="font-bold mb-1 flex items-center gap-2"><span className="text-red-500">⚠️</span> Amenazas</h4>
+                                <p>{(dataActual as any).amenazas}</p>
+                              </div>
+                            )}
+
+                            {/* Renderizado dinámico de la lista de Sitios (si existe en los datos) */}
+                            {(dataActual as any)?.listaSitios && (
+                              <div className="mt-6 animate-fade-in-up">
+                                <h3 className="text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">
+                                  Humedales Destacados de la Región
+                                </h3>
+                                <div className="grid grid-cols-2 gap-2">
+                                  {(dataActual as any).listaSitios.map((sitio: string, index: number) => (
+                                    <div 
+                                      key={index}
+                                      className="flex items-center p-2.5 bg-[#f0f4f8] rounded-lg text-xs font-semibold text-[#2c3e50] border border-[#d1d9e6] transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:bg-[#e2e8f0] hover:text-[#1a202c] cursor-default"
+                                    >
+                                      <span className="mr-2 text-blue-500 animate-pulse">💧</span>
+                                      {sitio}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
                           </motion.div>
                         </AnimatePresence>
                       </div>
@@ -978,45 +1354,7 @@ export default function Explorador() {
                 )}
               </div>
 
-              <div className="mt-auto p-8 pt-6 border-t-2 border-outline-variant/10 bg-[#EFEAE2]">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-2">
-                    <Layers className="w-5 h-5 text-[#654D81] opacity-60" />
-                    <h3 className="text-xs font-black text-[#654D81] uppercase tracking-[0.2em] leading-none">Mapas Temáticos Disponibles</h3>
-                  </div>
-                  <div className="text-[9px] font-black text-[#654D81] px-2 py-0.5 bg-[#654D81]/10 rounded border border-[#654D81]/20">GIS ENGINE v1.2</div>
-                </div>
-                <div className="space-y-3">
-                  {activeRegion.layers.map((layer) => (
-                    <button
-                      key={layer.id}
-                      onClick={() => setActiveLayerId(layer.id)}
-                      className={cn(
-                        "w-full flex items-center justify-between p-4 rounded-2xl transition-all border text-left",
-                        activeLayerId === layer.id
-                          ? "bg-[#B0946D]/10 border-[#B0946D]/30 shadow-md ring-2 ring-[#B0946D]/5"
-                          : "bg-transparent border-outline-variant/10 hover:border-[#B0946D]/30 hover:bg-[#B0946D]/5"
-                      )}
-                    >
-                      <div className="flex flex-col gap-1">
-                        <span className={cn(
-                          "text-xs font-black transition-colors uppercase tracking-tight",
-                          activeLayerId === layer.id ? "text-[#654D81]" : "text-[#4D4D4D]"
-                        )}>
-                          {layer.name}
-                        </span>
-                        <span className="text-[10px] font-medium text-[#4D4D4D] opacity-60">Visualización interactiva</span>
-                      </div>
-                      <div className={cn(
-                        "w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all",
-                        activeLayerId === layer.id ? "border-[#B0946D] bg-[#B0946D]" : "border-outline-variant"
-                      )}>
-                        {activeLayerId === layer.id && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+
             </div>
 
             <div className="h-4 bg-[#EFEAE2]" />
