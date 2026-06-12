@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   MapContainer,
   TileLayer,
   GeoJSON,
   Marker,
+  CircleMarker,
   Tooltip,
   Popup,
   useMap,
@@ -727,19 +728,64 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
 };
 
 const getLeafletStyle = (feature: any, styleJson: any, defaultStyle?: any) => {
+  const fallback = defaultStyle || { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
+
   try {
-    if (!styleJson || !styleJson.rules || !styleJson.rules[0] || !styleJson.rules[0].symbolizers || !styleJson.rules[0].symbolizers[0]) {
-      return defaultStyle || { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
+    if (!styleJson || !styleJson.rules || !Array.isArray(styleJson.rules)) {
+      return fallback;
     }
-    const symbolizer = styleJson.rules[0].symbolizers[0];
-    return {
-      fillColor: symbolizer.color || symbolizer.fillColor || '#2E7D32',
-      color: symbolizer.outlineColor || symbolizer.strokeColor || symbolizer.color || '#1B5E20',
-      weight: symbolizer.width || symbolizer.weight || symbolizer.outlineWidth || 1,
-      fillOpacity: symbolizer.opacity !== undefined ? symbolizer.opacity : (symbolizer.fillOpacity !== undefined ? symbolizer.fillOpacity : 0.6)
-    };
+
+    // Buscar la primera regla que coincida con las propiedades del feature
+    const matchingRule = styleJson.rules.find((rule: any) => {
+      // Si la regla no tiene filtro, aplica por defecto
+      if (!rule.filter || !Array.isArray(rule.filter) || rule.filter.length === 0) {
+        return true;
+      }
+
+      const [operator, attribute, value] = rule.filter;
+      const featureValue = feature?.properties?.[attribute];
+
+      // Si la propiedad no existe en el feature y hay un filtro explícito, no coincide
+      if (featureValue === undefined || featureValue === null) {
+        return false;
+      }
+
+      // Evaluar la condición según el operador de la regla
+      switch (operator) {
+        case "==":
+          // Convertimos a string para comparaciones seguras de valores (ej: 46 vs "46")
+          return String(featureValue) === String(value);
+        case "!=":
+          return String(featureValue) !== String(value);
+        case ">":
+          return Number(featureValue) > Number(value);
+        case "<":
+          return Number(featureValue) < Number(value);
+        case ">=":
+          return Number(featureValue) >= Number(value);
+        case "<=":
+          return Number(featureValue) <= Number(value);
+        default:
+          return false; // Operador desconocido
+      }
+    });
+
+    // Si se encontró una regla que cumple y tiene simbolizadores, retornamos su estilo
+    if (matchingRule && matchingRule.symbolizers && matchingRule.symbolizers.length > 0) {
+      const symbolizer = matchingRule.symbolizers[0];
+      return {
+        fillColor: symbolizer.color || symbolizer.fillColor || fallback.fillColor,
+        color: symbolizer.outlineColor || symbolizer.strokeColor || symbolizer.color || fallback.color,
+        weight: symbolizer.width || symbolizer.weight || symbolizer.outlineWidth || fallback.weight,
+        fillOpacity: symbolizer.opacity !== undefined ? symbolizer.opacity : (symbolizer.fillOpacity !== undefined ? symbolizer.fillOpacity : fallback.fillOpacity)
+      };
+    }
+
+    // Fallback si no aplicó ninguna regla o falta información visual
+    return fallback;
   } catch (e) {
-    return defaultStyle || { fillColor: '#2E7D32', color: '#1B5E20', weight: 1, fillOpacity: 0.6 };
+    console.warn("Error evaluating map style JSON:", e);
+    return fallback;
   }
 };
 
@@ -989,9 +1035,99 @@ function ZoomController({ activeLayer }: { activeLayer: MapLayer }) {
   return null;
 }
 
+let cachedSantaCruzMaskGeojson: any = null;
+let cachedSantaCruzBounds: L.LatLngBounds | null = null;
+
+const SantaCruzMaskEffect = () => {
+  const map = useMap();
+  const [maskGeojson, setMaskGeojson] = useState<any>(cachedSantaCruzMaskGeojson);
+
+  useEffect(() => {
+    if (cachedSantaCruzMaskGeojson && cachedSantaCruzBounds) {
+      map.fitBounds(cachedSantaCruzBounds, { padding: [50, 50], duration: 1.5 });
+      return;
+    }
+
+    fetch('/maps/geojson/LIMITE_MACROREGION_SANTA_CRUZ.geojson')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.features && data.features.length > 0) {
+          const originalGeom = data.features[0].geometry;
+          
+          const geoJsonLayer = L.geoJSON(data);
+          cachedSantaCruzBounds = geoJsonLayer.getBounds();
+          map.fitBounds(cachedSantaCruzBounds, { padding: [50, 50], duration: 1.5 });
+
+          const worldCoords = [
+            [
+              [-180, -90],
+              [-180, 90],
+              [180, 90],
+              [180, -90],
+              [-180, -90]
+            ]
+          ];
+          
+          let holes: any[] = [];
+          if (originalGeom.type === 'Polygon') {
+            holes = originalGeom.coordinates;
+          } else if (originalGeom.type === 'MultiPolygon') {
+            holes = originalGeom.coordinates.flat(1);
+          } else if (originalGeom.type === 'MultiLineString') {
+            holes = originalGeom.coordinates.map((line: any[]) => {
+              const ring = [...line];
+              const first = ring[0];
+              const last = ring[ring.length - 1];
+              if (first[0] !== last[0] || first[1] !== last[1]) {
+                ring.push(first);
+              }
+              return ring;
+            });
+          }
+
+          cachedSantaCruzMaskGeojson = {
+            type: "FeatureCollection",
+            features: [
+              {
+                type: "Feature",
+                properties: {},
+                geometry: {
+                  type: "Polygon",
+                  coordinates: [worldCoords[0], ...holes]
+                }
+              }
+            ]
+          };
+          setMaskGeojson(cachedSantaCruzMaskGeojson);
+        }
+      })
+      .catch(console.error);
+  }, [map]);
+
+  if (!maskGeojson) return null;
+
+  return (
+    <GeoJSON
+      data={maskGeojson}
+      style={{
+        fillColor: '#ffffff',
+        fillOpacity: 0.7,
+        color: 'transparent',
+        weight: 0
+      }}
+      interactive={false}
+    />
+  );
+};
+
 export default function Explorador() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const mapRef = useRef<L.Map | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCommunity, setSelectedCommunity] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<'fotos' | 'buscador'>('fotos');
 
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -1075,9 +1211,33 @@ export default function Explorador() {
   const activeLayer = activeRegion.layers.find(l => l.id === activeLayerId) || activeRegion.layers[0];
   const dataActual = obtenerDatosCapa(activeRegionKey, getStatsKey(activeLayer.id));
 
+  const isComunidadesLayer = activeLayer.id.includes('comunidades');
+
+  const filteredCommunities = useMemo(() => {
+    if (!isComunidadesLayer || !geoJsonData || !geoJsonData.features) return [];
+    const term = searchTerm.toLowerCase().trim();
+    return geoJsonData.features.filter((feature: any) => {
+      const name = feature.properties?.ciu_com || feature.properties?.name || feature.properties?.NOMBRE || feature.properties?.Comunidad || '';
+      if (!name) return false;
+      return name.toLowerCase().includes(term);
+    });
+  }, [geoJsonData, isComunidadesLayer, searchTerm]);
+
+  const handleCommunityClick = (feature: any) => {
+    setSelectedCommunity(feature);
+    if (mapRef.current && feature.geometry && feature.geometry.coordinates) {
+      // GeoJSON coordinates son [lng, lat]
+      const [lng, lat] = feature.geometry.coordinates;
+      mapRef.current.flyTo([lat, lng], 14, { duration: 1.5 });
+    }
+  };
+
   useEffect(() => {
     setCurrentImageIndex(0);
-  }, [activeLayerId]);
+    setSelectedCommunity(null);
+    setSearchTerm('');
+    setActiveTab('fotos');
+  }, [activeLayerId, activeRegionKey]);
 
   // Lazy Fetching Effect
   useEffect(() => {
@@ -1242,6 +1402,7 @@ export default function Explorador() {
       {/* MAP CONTAINER */}
       <div className="absolute inset-0 z-0 top-16">
         <MapContainer
+          ref={mapRef}
           center={activeRegion.center}
           zoom={activeRegion.zoom}
           className="h-full w-full"
@@ -1263,6 +1424,9 @@ export default function Explorador() {
               <span className="text-sm font-bold text-[#654D81] tracking-wide">Cargando datos espaciales...</span>
             </div>
           )}
+
+          {/* Efecto Máscara para Santa Cruz */}
+          {activeRegionKey === 'Santa Cruz' && <SantaCruzMaskEffect />}
 
           {/* Límite de la Macroregión */}
           {limiteGeoJson && (
@@ -1286,6 +1450,15 @@ export default function Explorador() {
               data={geoJsonData}
               style={(feature) => {
                 const baseStyle = getLeafletStyle(feature, styleData, activeLayer.defaultStyle);
+                if (activeLayer.id === 'amazon-asai') {
+                  return {
+                    ...baseStyle,
+                    fillColor: '#6E0792',
+                    color: '#6E0792',
+                    fillOpacity: 0.6,
+                    weight: 2
+                  };
+                }
                 if (activeLayer.id.toLowerCase().includes('rios')) {
                   return {
                     ...baseStyle,
@@ -1351,6 +1524,18 @@ export default function Explorador() {
             </MarkerClusterGroup>
           )}
 
+          {selectedCommunity && (
+            <CircleMarker 
+              center={[selectedCommunity.geometry.coordinates[1], selectedCommunity.geometry.coordinates[0]]} 
+              radius={12} 
+              pathOptions={{ fillColor: '#654d81', color: '#ffffff', weight: 3, fillOpacity: 1 }}
+            >
+              <Tooltip permanent direction="top" className="font-bold text-sm">
+                {selectedCommunity.properties.ciu_com || selectedCommunity.properties.name || selectedCommunity.properties.NOMBRE || selectedCommunity.properties.Comunidad || 'Comunidad'}
+              </Tooltip>
+            </CircleMarker>
+          )}
+
         </MapContainer>
       </div>
 
@@ -1363,13 +1548,13 @@ export default function Explorador() {
             exit={{ x: -450, opacity: 0 }}
             transition={{ type: "spring", damping: 30, stiffness: 200 }}
             className={cn(
-              "flex flex-col overflow-hidden transition-all duration-300",
+              "flex flex-col transition-all duration-300",
               // Móvil: Modal a pantalla completa controlado por isMobileMenuOpen
               isMobileMenuOpen 
                 ? "fixed inset-0 z-[2000] overflow-y-auto bg-[#EBEBEB] p-4" 
-                : "hidden",
+                : "hidden overflow-hidden",
               // Escritorio: Flotante habitual ignorando el estado móvil
-              "md:flex md:fixed md:left-4 md:top-24 md:bottom-4 md:w-[450px] md:bg-[#EFEAE2]/95 md:backdrop-blur-md md:z-40 md:rounded-[2.5rem] md:shadow-2xl md:border md:border-outline-variant/20 md:p-0 md:inset-auto"
+              "md:flex md:fixed md:left-4 md:top-24 md:w-[450px] md:h-[calc(100vh-7rem)] md:overflow-y-auto md:bg-[#EFEAE2]/95 md:backdrop-blur-md md:z-40 md:rounded-[2.5rem] md:shadow-2xl md:border md:border-outline-variant/20 md:p-0 md:inset-auto custom-scrollbar"
             )}
           >
             {/* Top Selector Section */}
@@ -1601,7 +1786,7 @@ export default function Explorador() {
 
       {/* FLYING RIGHT PANEL (GALLERY OR INSIGHT CARD) */}
       <AnimatePresence>
-        {isGalleryOpen && activeLayer.gallery.length > 0 && (
+        {isGalleryOpen && (activeLayer.gallery.length > 0 || isComunidadesLayer) && (
           <motion.aside
             initial={{ x: 450, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -1625,11 +1810,38 @@ export default function Explorador() {
               </button>
             </div>
 
-            <div className="flex-grow flex flex-col p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-              {activeLayer.gallery.length > 0 && (
-                <>
+            <div className="flex-grow flex flex-col p-6 overflow-hidden">
+              {isComunidadesLayer && activeLayer.gallery.length > 0 && (
+                <div className="flex gap-4 border-b border-gray-200 mb-6 shrink-0">
+                  <button
+                    onClick={() => setActiveTab('fotos')}
+                    className={cn(
+                      "pb-3 text-sm font-bold transition-colors",
+                      activeTab === 'fotos' 
+                        ? "border-b-2 border-[#654d81] text-[#654d81]" 
+                        : "text-gray-400 hover:text-gray-600"
+                    )}
+                  >
+                    Contexto Visual
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('buscador')}
+                    className={cn(
+                      "pb-3 text-sm font-bold transition-colors",
+                      activeTab === 'buscador' 
+                        ? "border-b-2 border-[#654d81] text-[#654d81]" 
+                        : "text-gray-400 hover:text-gray-600"
+                    )}
+                  >
+                    Buscar Comunidades
+                  </button>
+                </div>
+              )}
+
+              {(!isComunidadesLayer || activeTab === 'fotos') && activeLayer.gallery.length > 0 && (
+                <div className="flex flex-col flex-1 overflow-y-auto custom-scrollbar pr-2">
                   {/* Image Carousel */}
-                  <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-black/5 mb-6 group shadow-lg">
+                  <div className="shrink-0 relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-black/5 mb-6 group shadow-lg">
                     <AnimatePresence mode="wait">
                       <motion.img
                         key={activeLayer.gallery[currentImageIndex]?.url}
@@ -1693,7 +1905,7 @@ export default function Explorador() {
                   </div>
 
                   {/* Info Adicional / Thumbnails */}
-                  <div className="flex-grow overflow-y-auto custom-scrollbar">
+                  <div className="shrink-0 overflow-y-auto custom-scrollbar">
                     <div className="grid grid-cols-3 gap-2">
                       {activeLayer.gallery.map((img, i) => (
                         <button
@@ -1716,7 +1928,52 @@ export default function Explorador() {
                       </p>
                     </div>
                   </div>
-                </>
+                </div>
+              )}
+
+              {isComunidadesLayer && (activeTab === 'buscador' || activeLayer.gallery.length === 0) && geoJsonData && (
+                <div className="flex flex-col flex-1 overflow-hidden">
+                  <div className="mb-4 shrink-0">
+                    <input
+                      type="text"
+                      placeholder="Buscar comunidad..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full px-4 py-3 rounded-2xl bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#654D81]/50 focus:border-transparent text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-all"
+                    />
+                  </div>
+                  <div className="flex-grow overflow-y-auto custom-scrollbar bg-white rounded-2xl border border-gray-100 shadow-sm">
+                    {filteredCommunities.length > 0 ? (
+                      <ul className="divide-y divide-gray-100">
+                        {filteredCommunities.map((feature: any, idx: number) => (
+                          <li key={idx}>
+                            <button
+                              onClick={() => handleCommunityClick(feature)}
+                              className={cn(
+                                "w-full text-left p-3 hover:bg-[#654D81]/5 transition-colors group flex items-center justify-between",
+                                selectedCommunity === feature ? "bg-[#654D81]/10" : ""
+                              )}
+                            >
+                              <div>
+                                <span className="text-sm font-medium text-gray-800 group-hover:text-[#654D81] transition-colors">
+                                  {feature.properties?.ciu_com || feature.properties?.name || feature.properties?.NOMBRE || feature.properties?.Comunidad || 'Comunidad Sin Nombre'}
+                                </span>
+                                {feature.properties?.mpio && (
+                                  <p className="text-xs text-gray-500 mt-0.5">{feature.properties.mpio}</p>
+                                )}
+                              </div>
+                              <MapPin className="w-4 h-4 text-gray-400 group-hover:text-[#654D81] transition-colors" />
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="p-6 text-center text-sm text-gray-500">
+                        No se encontraron comunidades.
+                      </div>
+                    )}
+                  </div>
+                </div>
               )}
 
               {/* STATS MOVED TO LEFT PANEL */}
