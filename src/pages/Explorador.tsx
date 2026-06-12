@@ -209,6 +209,23 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
         styleUrl: "/maps/mapStyles/ASAI_AREAS_POTENCIALES_AMAZONIA.json"
       },
       {
+        id: "amazon-procesadoras",
+        category: "Sistemas Productivos",
+        name: "Procesadoras de Alimentos",
+        productName: "Procesadoras Pando",
+        badge: "Infraestructura",
+        color: "#6E0792",
+        stats: [],
+        technicalInfo: {
+          context: "Plantas procesadoras y centros de acopio en Pando.",
+          social: "Generación de valor agregado local.",
+          challenges: ["Logística de transporte", "Acceso a mercados"]
+        },
+        gallery: [],
+        geometryType: 'points',
+        geojsonUrl: "/maps/geojson/PROCESADORA_DE_ALIMENTOS_PANDO.geojson"
+      },
+      {
         id: "amazon-comunidades",
         category: "Sistemas Productivos",
         name: "Comunidades",
@@ -577,8 +594,7 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
           { url: "/images/quinua/quinua4.jpg", description: "Sistemas comunitarios de siembra y protección del suelo altoandino." }
         ],
         geometryType: 'points',
-        geojsonUrl: "/maps/geojson/PRODUCCION_QUINOA_ALTIPLANO_2024.geojson",
-        styleUrl: "/maps/mapStyles/QUINOA_MACROREGION_ALTIPLANO.json"
+        geojsonUrl: "/maps/geojson/PRODUCCION_QUINOA_ALTIPLANO_2024.geojson"
       },
       {
         id: "altiplano-comunidades",
@@ -1459,6 +1475,7 @@ export default function Explorador() {
                     weight: 2
                   };
                 }
+
                 if (activeLayer.id.toLowerCase().includes('rios')) {
                   return {
                     ...baseStyle,
@@ -1487,10 +1504,20 @@ export default function Explorador() {
                 key={`${activeLayer.id}-points`}
                 data={geoJsonData}
                 pointToLayer={(feature, latlng) => {
+                  let fillColor = "#B0946D";
+                  let borderColor = "#FFFFFF";
+
+                  if (activeLayer.id === 'amazon-procesadoras') {
+                    fillColor = "#6E0792";
+                  } else if (activeLayer.id === 'altiplano-quinua') {
+                    fillColor = "#DAA520";
+                    borderColor = "#B8860B";
+                  }
+
                   return L.circleMarker(latlng, {
                     radius: 9, // Aumentado de 5 a 9 para mejor visibilidad táctil
-                    fillColor: "#B0946D",
-                    color: "#FFFFFF",
+                    fillColor: fillColor,
+                    color: borderColor,
                     weight: 2, // Borde más grueso para resaltar sobre el fondo
                     opacity: 1,
                     fillOpacity: 0.9
