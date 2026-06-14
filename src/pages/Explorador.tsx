@@ -1149,6 +1149,7 @@ export default function Explorador() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Initialize from URL params if available
   const initialRegionParam = searchParams.get("region") as RegionKey;
@@ -1416,7 +1417,12 @@ export default function Explorador() {
       </button>
 
       {/* MAP CONTAINER */}
-      <div className="absolute inset-0 z-0 top-16">
+      <div 
+        className="absolute inset-0 z-0 top-16"
+        onClickCapture={() => setHasInteracted(true)}
+        onPointerDownCapture={() => setHasInteracted(true)}
+        onTouchStartCapture={() => setHasInteracted(true)}
+      >
         <MapContainer
           ref={mapRef}
           center={activeRegion.center}
@@ -1564,6 +1570,16 @@ export default function Explorador() {
           )}
 
         </MapContainer>
+
+        {/* Indicador Flotante de Interacción (Call to Action) */}
+        {!hasInteracted && (
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none">
+            <div className="bg-[#B0946D]/95 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 animate-bounce border border-white/20">
+              <span className="text-xl">👆</span>
+              <span className="font-bold tracking-wide">Toca el mapa para explorar</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* FLYING LEFT PANEL */}
