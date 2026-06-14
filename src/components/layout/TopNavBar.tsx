@@ -13,7 +13,6 @@ export default function TopNavBar() {
     { name: "Explorador", path: "/explorador" },
     { name: "Catálogo", path: "/catalogo" },
     { name: "Recursos", path: "/recursos" },
-    { name: "Quiénes Somos", path: "/nosotros" },
   ];
 
   return (

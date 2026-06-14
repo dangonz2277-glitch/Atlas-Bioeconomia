@@ -833,7 +833,7 @@ const LAYER_STATS: any = {
         { icono: "🌳", label: "Tipos de bosque", valor: "7" },
         { icono: "🌴", label: "Especies dominantes", valor: "Múltiples" },
         { icono: "📍", label: "Áreas de aprovechamiento", valor: "Activas" },
-        { icono: "🛡️", label: "Áreas Nacionales", valor: "5" }
+        { icono: "🛡️", label: "Áreas Protegidas Nacionales", valor: "5" }
       ],
       graficos: []
     },
@@ -879,7 +879,7 @@ const LAYER_STATS: any = {
         { icono: "🌳", label: "Tipos de bosque", valor: "7" },
         { icono: "🌴", label: "Especies dominantes", valor: "Múltiples" },
         { icono: "📍", label: "Áreas de aprovechamiento", valor: "Activas" },
-        { icono: "🛡️", label: "Áreas Nacionales", valor: "5" }
+        { icono: "🛡️", label: "Áreas Protegidas Nacionales", valor: "5" }
       ],
       graficos: []
     },

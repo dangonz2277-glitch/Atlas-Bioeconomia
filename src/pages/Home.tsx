@@ -193,7 +193,7 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-6">Respaldo Institucional</h2>
           <p className="font-sans text-lg md:text-xl text-on-surface-variant leading-relaxed">
-            El Atlas Virtual de Bioeconomía en Bolivia es una iniciativa impulsada por el <span className="font-bold text-primary">Ministerio de Medio Ambiente y Agua</span> con el apoyo técnico de la <span className="font-bold text-primary">Organización de las Naciones Unidas para la Alimentación y la Agricultura (FAO)</span>. Esta plataforma consolida la bioeconomía como un motor de desarrollo sostenible, seguridad alimentaria y resiliencia climática en beneficio de las comunidades bolivianas.
+            El Atlas Virtual de Bioeconomía en Bolivia es una iniciativa impulsada por el <span className="font-bold text-primary">Ministerio de Desarrollo Productivo, Rural y Agua</span>, con el apoyo de la <span className="font-bold text-primary">Organización de las Naciones Unidas para la Alimentación y la Agricultura (FAO)</span>, la <span className="font-bold text-primary">Cooperación de Suecia / Unión Europea</span> y la organización <span className="font-bold text-primary">Bosques Sostenibles</span>. Esta plataforma consolida la bioeconomía como un motor de desarrollo sostenible, seguridad alimentaria y resiliencia climática en beneficio de las comunidades bolivianas.
           </p>
         </div>
       </section>

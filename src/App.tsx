@@ -11,7 +11,6 @@ import Home from "@/src/pages/Home";
 import Explorador from "@/src/pages/Explorador";
 import Catalogo from "@/src/pages/Catalogo";
 import Recursos from "@/src/pages/Recursos";
-import Nosotros from "@/src/pages/Nosotros";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -34,7 +33,6 @@ function AppContent() {
           <Route path="/explorador" element={<Explorador />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/recursos" element={<Recursos />} />
-          <Route path="/nosotros" element={<Nosotros />} />
         </Routes>
       </div>
       {!isExplorador && <Footer />}
