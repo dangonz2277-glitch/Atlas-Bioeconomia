@@ -136,9 +136,10 @@ interface MapLayer {
     challenges: string[];
   };
   gallery: { url: string; description: string }[];
-  geometryType: 'polygon' | 'points';
+  geometryType: 'polygon' | 'points' | 'polyline';
   geojsonUrl: string;
   styleUrl?: string;
+  style?: any;
   defaultStyle?: {
     fillColor?: string;
     color?: string;
@@ -280,9 +281,13 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
           challenges: ["Contaminación", "Alteración del ciclo hidrológico"]
         },
         gallery: [],
-        geometryType: 'polygon',
-        geojsonUrl: "/maps/geojson/RIOS_SEC_AMAZONIA_2003_simplified.geojson",
-        styleUrl: "/maps/mapStyles/RIOS_PRIN_AMAZONIA.json"
+        geometryType: 'polyline',
+        geojsonUrl: "/maps/geojson/RIOS_SEC_AMAZONIA_simplified.geojson",
+        style: {
+          color: "#4da6ff",
+          weight: 1.5,
+          opacity: 0.8
+        }
       },
       {
         id: "amazon-ap_nacional",
@@ -452,9 +457,9 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
           challenges: ["Contaminación", "Alteración del ciclo hidrológico"]
         },
         gallery: [],
-        geometryType: 'polygon',
-        geojsonUrl: "/maps/geojson/RIOS_PRIN_SANTA_CRUZ_2003_simplified.geojson",
-        styleUrl: "/maps/mapStyles/RIOS_PRIN_SANTA_CRUZ.json"
+        geometryType: 'polyline',
+        geojsonUrl: "/maps/geojson/RIOS_PRIN_SANTA_CRUZ_2003.geojson",
+        style: { color: "#1E90FF", weight: 2.5, opacity: 0.9 }
       },
       {
         id: "sc-rios_secundarios",
@@ -470,9 +475,9 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
           challenges: ["Contaminación", "Alteración del ciclo hidrológico"]
         },
         gallery: [],
-        geometryType: 'polygon',
-        geojsonUrl: "/maps/geojson/RIOS_SEC_SANTA_CRUZ_2003_simplified.geojson",
-        styleUrl: "/maps/mapStyles/RIOS_PRIN_SANTA_CRUZ.json"
+        geometryType: 'polyline',
+        geojsonUrl: "/maps/geojson/RIOS_SEC_SANTA_CRUZ_simplified.geojson",
+        style: { color: "#87CEFA", weight: 1.5, opacity: 0.8 }
       },
       {
         id: "sc-ap_nacional",
@@ -645,9 +650,9 @@ const macroRegions: Record<RegionKey, MacroRegion> = {
           challenges: ["Escasez de agua", "Contaminación minera"]
         },
         gallery: [],
-        geometryType: 'polygon',
-        geojsonUrl: "/maps/geojson/RIOS_SEC_ALTIPLANO_2003_simplified.geojson",
-        styleUrl: "/maps/mapStyles/RIOS_PRIN_ALTIPLANO.json"
+        geometryType: 'polyline',
+        geojsonUrl: "/maps/geojson/RIOS_SEC_ALTIPLANO_simplified.geojson",
+        styleUrl: "/maps/mapStyles/RIOS_SEC_ALTIPLANO.json"
       },
       {
         id: "altiplano-ap_nacional",
@@ -859,6 +864,46 @@ const LAYER_STATS: any = {
       graficos: [
         { label: "Participación Comunitaria", porcentaje: 75, color: "bg-[#B0946D]" }
       ]
+    },
+    rios: {
+      titulo: "Red Hídrica Amazónica",
+      descripcion: "La red hídrica de la Amazonía boliviana forma parte de la gran cuenca amazónica, articulada principalmente por el sistema de los ríos Beni, Mamoré, Madre de Dios, Iténez o Guaporé, Abuná y Acre, los cuales drenan hacia el río Madera y posteriormente al río Amazonas. En el sector norte del país, especialmente en Pando, norte de Beni y norte de La Paz, esta red fluvial presenta un patrón altamente ramificado, con ríos meándricos, arroyos, lagunas, zonas inundables y bosques ribereños que cumplen un papel fundamental en la regulación hídrica, la conectividad ecológica y el sostenimiento de los sistemas productivos amazónicos. La Amazonía boliviana tiene como unidades hidrográficas relevantes a los sistemas Mamoré, Iténez, Beni y Madre de Dios, reconocidos entre los de mayor importancia dentro de la Amazonía boliviana.",
+      estadisticas: [
+        { icono: "📍", label: "Ríos principales", valor: "12" },
+        { icono: "🌊", label: "Sistemas Mayores", valor: "Beni, Mamoré, Iténez" },
+        { icono: "🗺️", label: "Cobertura", valor: "Pando y Norte de Beni/La Paz" },
+        { icono: "💧", label: "Drenaje Final", valor: "Río Amazonas" }
+      ]
+    },
+    ap_nacional: {
+      titulo: "Áreas Protegidas Nacionales",
+      descripcion: "Las Áreas Protegidas Nacionales ubicadas en la macrorregión amazónica constituyen espacios estratégicos para la conservación del patrimonio natural, cultural y territorial del país. En el caso boliviano, estas áreas forman parte del Sistema Nacional de Áreas Protegidas (SNAP), administrado por el Servicio Nacional de Áreas Protegidas (SERNAP), institución encargada de salvaguardar las áreas protegidas de interés nacional y coordinar su gestión integral. \n\nEn la macrorregión amazónica, estas áreas cumplen una función ambiental fundamental, ya que protegen bosques tropicales, ríos, humedales, serranías, sabanas inundables y ecosistemas de alta biodiversidad. Entre las áreas protegidas nacionales vinculadas a esta región se encuentran, entre otras, el Parque Nacional y Área Natural de Manejo Integrado Madidi, la Reserva de la Biosfera y Tierra Comunitaria de Origen Pilón Lajas, la Reserva Nacional de Vida Silvestre Amazónica Manuripi, la Reserva de la Biosfera Estación Biológica del Beni, el Parque Nacional y Territorio Indígena Isiboro Sécure (TIPNIS) y el Parque Nacional Noel Kempff Mercado. Estas áreas no solo conservan especies de flora y fauna, sino que también resguardan territorios indígenas, saberes tradicionales, fuentes de agua y paisajes de importancia ecológica nacional e internacional.",
+      estadisticas: [
+        { icono: "🛡️", label: "Áreas Nacionales", valor: "5" },
+        { icono: "🏢", label: "Administración", valor: "SERNAP" },
+        { icono: "🇧🇴", label: "Sistema de Áreas", valor: "SNAP" },
+        { icono: "🌿", label: "Conservación", valor: "Alta Biodiversidad" }
+      ]
+    },
+    ap_departamental: {
+      titulo: "Áreas Protegidas Departamentales",
+      descripcion: "En el departamento de Pando, la principal área protegida departamental relacionada con la Amazonía es la Reserva de Vida Silvestre Departamental Bruno Racua, ubicada en la provincia Federico Román, municipio de Nueva Esperanza. Esta reserva conserva una muestra representativa del bosque amazónico del noreste boliviano y se vincula directamente con la protección de la vida silvestre, los ecosistemas amazónicos y los valores culturales de las comunidades locales. Fue creada mediante la Ley de la República N.º 3158, de 25 de agosto de 2005, y su categoría de manejo es Reserva de Vida Silvestre. Bruno Racua cuenta con una superficie aproximada de 74.054 hectáreas y forma parte del mosaico de conservación amazónico que conecta áreas estratégicas entre la frontera con Perú, la Reserva Manuripi, espacios municipales y la frontera con Brasil. Además, estudios de avifauna registraron 283 especies de aves en cuatro localidades de la reserva, incluyendo registros nuevos para Pando y para la provincia Federico Román, lo que refuerza su valor científico y biogeográfico.\n\nEn el departamento del Beni, las áreas protegidas departamentales tienen una importancia especial porque resguardan ecosistemas característicos de la Amazonía beniana y de los Llanos de Moxos, donde se combinan bosques amazónicos, sabanas inundables, humedales, ríos y paisajes arqueológicos. Entre las áreas más representativas se encuentran la Zona de Protección de Cuencas Hidrográficas Eva Eva Mosetenes, con aproximadamente 225.000 hectáreas.",
+      estadisticas: [
+        { icono: "🌳", label: "Superficie Bruno Racua", valor: "74.054 ha" },
+        { icono: "🐦", label: "Especies de aves (B. Racua)", valor: "283" },
+        { icono: "📜", label: "Creación Bruno Racua", valor: "2005" },
+        { icono: "💧", label: "Sup. Eva Eva Mosetenes", valor: "225.000 ha" }
+      ]
+    },
+    ap_municipal: {
+      titulo: "Áreas Protegidas Municipales",
+      descripcion: "Las Áreas Protegidas Municipales de Pando, Beni y La Paz forman una red viva de conservación en la macrorregión amazónica boliviana. Desde los bosques castañeros de Pando hasta los humedales del Beni y las serranías amazónicas del norte paceño, estos espacios protegen agua, biodiversidad, paisajes, culturas locales y medios de vida sostenibles. Su valor principal está en que nacen desde el territorio: son los municipios, comunidades, pueblos indígenas y actores locales quienes convierten el bosque, los ríos y las sabanas en patrimonio común para las generaciones presentes y futuras.",
+      estadisticas: [
+        { icono: "📍", label: "Cobertura", valor: "Pando, Beni, La Paz" },
+        { icono: "🌳", label: "Ecosistemas", valor: "Bosques y Humedales" },
+        { icono: "🤝", label: "Gestión Territorial", valor: "Actores Locales" },
+        { icono: "💧", label: "Conservación", valor: "Agua y Biodiversidad" }
+      ]
     }
   },
   altiplano: {
@@ -984,7 +1029,10 @@ const getStatsKey = (layerId: string) => {
   if (layerId.includes('comunidades')) return 'comunidades';
   if (layerId.includes('asai')) return 'areas_potenciales';
   if (layerId.includes('quinua')) return 'produccion_quinua';
-  if (layerId.includes('ap_nacional') || layerId.includes('ap_departamental') || layerId.includes('ap_municipal') || layerId.includes('areas_protegidas')) return 'areas_protegidas';
+  if (layerId.includes('ap_nacional')) return 'ap_nacional';
+  if (layerId.includes('ap_departamental')) return 'ap_departamental';
+  if (layerId.includes('ap_municipal')) return 'ap_municipal';
+  if (layerId.includes('areas_protegidas')) return 'areas_protegidas';
   if (layerId.includes('sitios_ramsar')) return 'sitios_ramsar';
   return 'bosques';
 };
@@ -1334,7 +1382,8 @@ export default function Explorador() {
     const name = feature.properties?.name || feature.properties?.NOMBRE || activeLayer.name;
     
     if (activeLayer.id.toLowerCase().includes('rios')) {
-      const nombreRio = feature.properties?.NOMBRE || feature.properties?.NOM_RIO || feature.properties?.NOM_CURSO || "Río Principal";
+      const p = feature.properties || {};
+      const nombreRio = p.NOMBRE || p.nombre || p.name || p.NOM_RIO || p.NOM_CURSO || p.RIVER || activeLayer.productName || activeLayer.name;
       layer.bindTooltip(nombreRio, {
         sticky: true,
         direction: 'auto',
@@ -1466,11 +1515,14 @@ export default function Explorador() {
           )}
 
           {/* Render Active Layer Geometry */}
-          {!isLoadingMap && geoJsonData && activeLayer.geometryType === 'polygon' && (
+          {!isLoadingMap && geoJsonData && (activeLayer.geometryType === 'polygon' || activeLayer.geometryType === 'polyline') && (
             <GeoJSON
               key={`${activeLayer.id}-poly`}
               data={geoJsonData}
               style={(feature) => {
+                if (activeLayer.style) {
+                  return activeLayer.style;
+                }
                 const baseStyle = getLeafletStyle(feature, styleData, activeLayer.defaultStyle);
                 if (activeLayer.id === 'amazon-asai') {
                   return {
