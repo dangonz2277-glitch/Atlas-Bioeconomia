@@ -1,0 +1,48 @@
+# ==========================================
+# Directorios de Dependencias y Compilación
+# ==========================================
+# Ignora la carpeta local de dependencias. Obliga a que la capa 'build-stage'
+# forje dependencias limpias e inherentes a la arquitectura de Linux Alpine.
+node_modules/
+
+# Ignora volcados previos de empaquetadores locales. 
+# Previene colisiones topológicas al traspasar la carpeta de producción en Docker.
+dist/
+build/
+out/
+
+# ==========================================
+# Archivos de Variables de Entorno y Credenciales
+# ==========================================
+# Exclusión crítica de inyección de credenciales. Las variables se deben pasar al
+# demonio de Docker en tiempo de ejecución (Run-time via docker run -e), jamás horneadas en la imagen.
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+*.pem
+
+# ==========================================
+# Versionamiento de Código y Metadatos
+# ==========================================
+# Previene el filtrado del historial de confirmaciones de repositorios.
+# Disminuye el peso inútil en el contenedor, ya que git no opera en producción.
+.git/
+.gitignore
+
+# ==========================================
+# Entornos de Desarrollo Local y Logística
+# ==========================================
+# Purga metadatos de los editores IDE o depuradores.
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos de registro de errores (logs) generados transitoriamente por Node.js o NPM.
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentación transitoria.
+README.md
